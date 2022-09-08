@@ -27,7 +27,7 @@ struct AddCityView: View {
                 }
                 HStack {
                     Button {
-                        model.forecastForCities?.append(forecastForNewCity)
+                        model.appendCity(forecastForNewCity)
                         DispatchQueue.global(qos: .userInteractive).async {
                             model.saveCities()
                         }

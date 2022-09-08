@@ -1,17 +1,24 @@
 import Foundation
 import Combine
 
+extension Publisher {
+   
+}
+
 final class ForecastViewModel: ObservableObject {
     
     @Published var forecastForCities: [ForecastModel.Forecast]? = nil
     @Published var forecastForNewCity: ForecastModel.Forecast? = nil
+    @Published var coordForCities: [ForecastTodayModel.CityCoord]? = nil
     
     @Published var errorFetchForecast: API.RequestError? = nil
     
     var subscriptions = Set<AnyCancellable>()
     
     func forecastCities() {
-        let publisher = loadCitiesCoordFuture()
+        coordForCities = loadCitiesCoord()
+   //   let publisher = loadCitiesCoordFuture()
+        let publisher = coordForCities.publisher
             .flatMap (ForecastModel.fetchForecastForCitiesCoord)
             .share()
         
@@ -49,6 +56,9 @@ final class ForecastViewModel: ObservableObject {
     }
     
     func forecastNewCity(_ cityCoord: ForecastTodayModel.CityCoord) {
+        
+        forecastForNewCity = nil
+        
         let publisher = ForecastModel.fetchForecastForCityCoord(cityCoord)
             .share()
         
@@ -86,7 +96,7 @@ final class ForecastViewModel: ObservableObject {
     }
 
     func loadCitiesCoord() -> [ForecastTodayModel.CityCoord] {
-        var citiesCoord = [ForecastTodayModel.CityCoord(lat: 0.0, lon: 0.0)]
+        var citiesCoord = [ForecastTodayModel.CityCoord]()
         if let url = FileManager.documentURL?.appendingPathComponent("CitiesCoord1") {
             do {
                 let data = try Data(contentsOf: url)
@@ -105,10 +115,19 @@ final class ForecastViewModel: ObservableObject {
         }
     }
     
+    func appendCity(_ forecastForNewCity: ForecastModel.Forecast) {
+        forecastForCities?.append(forecastForNewCity)
+        coordForCities?.append(forecastForNewCity.forecastToday.coord)
+    }
+    
     func  removeCity(_ forecastModel: ForecastTodayModel)  {
         forecastForCities?.remove(
             at: forecastForCities?
             .firstIndex(where: {$0.forecastToday == forecastModel}) ?? 0
+        )
+        coordForCities?.remove(
+            at: coordForCities?
+                .firstIndex(where: {$0 == forecastModel.coord}) ?? 0
         )
     }
     
@@ -169,6 +188,7 @@ final class ForecastViewModel: ObservableObject {
     
     init() {
         forecastCities()
+        
     }
     
 }
