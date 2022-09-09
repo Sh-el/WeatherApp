@@ -24,8 +24,4 @@ struct HumidityView: View {
     }
 }
 
-//struct HumidityView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        HumidityView(forecastTodayForCity: ForecastTodayModel.empty)
-//    }
-//}
+

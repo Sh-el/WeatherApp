@@ -6,7 +6,7 @@ struct WeatherAppApp: App {
     
     var body: some Scene {
         WindowGroup {
-            MainView1()
+            MainView()
                 .environmentObject(model)
                 .onReceive(model.timer) {_ in
                     model.forecastCities()

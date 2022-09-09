@@ -24,16 +24,8 @@ struct ForecastTodayModel: Codable, Hashable {
     }
     
     struct CityCoord: Encodable, Decodable, Hashable {
-        var lat: Double
-        var lon: Double
-        
-//        static func ==(left: CityCoord, right: CityCoord) -> Bool {
-//            if left.lat == right.lat && left.lon == left.lon {
-//                return true
-//            } else {
-//                return false
-//            }
-//        }
+        var lat, lon: Double
+
     }
     
     struct Main: Codable {

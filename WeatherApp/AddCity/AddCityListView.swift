@@ -2,7 +2,7 @@ import SwiftUI
 
 struct AddCityListView: View {
     @EnvironmentObject var model: ForecastViewModel
-    @StateObject var newCityGeocodingList = NewCityGeocodingListViewModel()
+    @StateObject var newCityGeocodingList = GeocodingViewModel()
     @State private var isAddCityView = false
     @Binding var isAddCity: Bool
     @Binding var selectedTab: ForecastTodayModel?
@@ -59,12 +59,13 @@ struct AddCityListView: View {
                             .lineLimit(1)
                         }
                         .sheet(isPresented: $isAddCityView) {
-                            AddCityView(isAddCityView: $isAddCityView, isAddCity: $isAddCity, selectedTab: $selectedTab)
+                            AddCityView(isAddCityView: $isAddCityView,
+                                        isAddCity: $isAddCity,
+                                        selectedTab: $selectedTab)
                         }
                         .listRowBackground(Color.black)
                     }
-                }
-                else if newCityGeocodingList.errorFetchForecast == .invalidRequest {
+                } else if newCityGeocodingList.errorFetchForecast == .invalidRequest {
                     ErrorInvalidRequestForAddCityView()
                         .listRowBackground(Color.black)
                 }

@@ -19,7 +19,6 @@ class Coordinator: NSObject, MKMapViewDelegate {
             }
         }
     }
-    
 }
 
 struct MapViewForYourCoordinate: UIViewRepresentable {

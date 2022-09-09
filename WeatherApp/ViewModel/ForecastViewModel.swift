@@ -2,7 +2,7 @@ import Foundation
 import Combine
 
 extension Publisher {
-   
+    
 }
 
 final class ForecastViewModel: ObservableObject {
@@ -17,7 +17,7 @@ final class ForecastViewModel: ObservableObject {
     
     func forecastCities() {
         coordForCities = loadCitiesCoord()
-   //   let publisher = loadCitiesCoordFuture()
+        //   let publisher = loadCitiesCoordFuture()
         let publisher = coordForCities.publisher
             .flatMap (ForecastModel.fetchForecastForCitiesCoord)
             .share()
@@ -37,6 +37,7 @@ final class ForecastViewModel: ObservableObject {
         
         publisher
             .asResult()
+ //           .errorDescription(self)
             .map {result in
                 switch result {
                 case .failure(let error):
@@ -56,7 +57,6 @@ final class ForecastViewModel: ObservableObject {
     }
     
     func forecastNewCity(_ cityCoord: ForecastTodayModel.CityCoord) {
-        
         forecastForNewCity = nil
         
         let publisher = ForecastModel.fetchForecastForCityCoord(cityCoord)
@@ -94,7 +94,7 @@ final class ForecastViewModel: ObservableObject {
             .receive(on: DispatchQueue.main)
             .assign(to: &$errorFetchForecast)
     }
-
+    
     func loadCitiesCoord() -> [ForecastTodayModel.CityCoord] {
         var citiesCoord = [ForecastTodayModel.CityCoord]()
         if let url = FileManager.documentURL?.appendingPathComponent("CitiesCoord1") {
@@ -111,7 +111,7 @@ final class ForecastViewModel: ObservableObject {
     
     func loadCitiesCoordFuture() -> Future<[ForecastTodayModel.CityCoord], Never> {
         Future {promise in
-                promise(.success(self.loadCitiesCoord()))
+            promise(.success(self.loadCitiesCoord()))
         }
     }
     
@@ -123,7 +123,7 @@ final class ForecastViewModel: ObservableObject {
     func  removeCity(_ forecastModel: ForecastTodayModel)  {
         forecastForCities?.remove(
             at: forecastForCities?
-            .firstIndex(where: {$0.forecastToday == forecastModel}) ?? 0
+                .firstIndex(where: {$0.forecastToday == forecastModel}) ?? 0
         )
         coordForCities?.remove(
             at: coordForCities?
@@ -168,7 +168,7 @@ final class ForecastViewModel: ObservableObject {
     //  private var minutes = Calendar.current.component(.minute, from: Date())
     private var timeIntreval1970 = NSDate().timeIntervalSince1970
     private var tommorow = Date().dayAfterMidnight.timeIntervalSince1970
-
+    
     func isDay(_ forecastTodayForSelectedCity: ForecastTodayModel) -> Bool {
         if Int(NSDate().timeIntervalSince1970) >= forecastTodayForSelectedCity.sys.sunrise  && Int(NSDate().timeIntervalSince1970) < forecastTodayForSelectedCity.sys.sunset {
             return true
@@ -177,14 +177,14 @@ final class ForecastViewModel: ObservableObject {
         }
     }
     
-    func isCitiesEmpty() -> Bool {
-        let citiesCoord = loadCitiesCoord()
-        if citiesCoord.isEmpty {
-            return true
-        } else {
-            return false
-        }
-    }
+    //    func isCitiesEmpty() -> Bool {
+    //        let citiesCoord = loadCitiesCoord()
+    //        if citiesCoord.isEmpty {
+    //            return true
+    //        } else {
+    //            return false
+    //        }
+    //    }
     
     init() {
         forecastCities()
@@ -249,4 +249,24 @@ extension Publisher {
     }
 }
 
-
+//extension Publisher {
+//    func errorDescription<T>() -> AnyPublisher<T, Never> {
+//        self
+//          
+//            .map {result in
+//                switch result {
+//                case .failure(let error):
+//                    if case API.RequestError.addressUnreachable = error as! API.RequestError {
+//                        return API.RequestError.addressUnreachable as! T}
+//                    else if case API.RequestError.invalidRequest = error as! API.RequestError {
+//                        return API.RequestError.invalidRequest as! T}
+//                    else if case API.RequestError.decodingError = error as! API.RequestError {
+//                        return API.RequestError.decodingError as! T}
+//                    else {return API.RequestError.decodingError as! T}
+//                case .success:
+//                    return API.RequestError.noError as! T
+//                }
+//            }
+//            .eraseToAnyPublisher()
+//    }
+//}

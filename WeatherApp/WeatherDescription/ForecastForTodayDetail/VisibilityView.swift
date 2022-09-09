@@ -24,8 +24,4 @@ struct VisibilityView: View {
     }
 }
 
-//struct VisibilityView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        VisibilityView(forecastTodayForCity: ForecastTodayModel.empty)
-//    }
-//}
+

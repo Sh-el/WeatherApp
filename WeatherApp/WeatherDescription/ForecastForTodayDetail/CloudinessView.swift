@@ -24,8 +24,3 @@ struct CloudinessView: View {
     }
 }
 
-//struct CloudinessView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CloudinessView(forecastTodayForCity: ForecastTodayModel.empty)
-//    }
-//}

@@ -4,7 +4,8 @@ struct AirPollutionView: View {
     var forecastForCity: ForecastModel.Forecast
     
     var body: some View {
-        if !forecastForCity.airPollutionModel.list.isEmpty, let aqi = forecastForCity.airPollutionModel.list.first?.main.aqi {
+        if !forecastForCity.airPollutionModel.list.isEmpty,
+           let aqi = forecastForCity.airPollutionModel.list.first?.main.aqi {
             VStack(alignment: .leading) {
                 HStack {
                     Image(systemName: "wind")
@@ -103,8 +104,3 @@ struct AirPollutionView: View {
 
 
 
-//struct AirPollutionView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        AirPollutionView(forecastForCity: ForecastModel.Forecast.empty)
-//    }
-//}

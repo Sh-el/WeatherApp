@@ -17,11 +17,6 @@ struct WeatherDescriptionView: View {
 }
 
 
-//struct WeatherDayDeatailsView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        WeatherDescriptionView(index: 0)
-//            .environmentObject(WeatherViewModel())
-//    }
-//}
+
 
 

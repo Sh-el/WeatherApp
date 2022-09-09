@@ -45,8 +45,3 @@ struct Forecast: View {
     }
 }
 
-//struct Forecast_Previews: PreviewProvider {
-//    static var previews: some View {
-//        Forecast()
-//    }
-//}

@@ -51,8 +51,7 @@ struct AddCityView: View {
             }
             .background(BackgroundView(forecastTodayForSelectedCity: forecastForNewCity.forecastToday))
             .foregroundColor(Constants.textColor)
-        }
-        else {
+        } else {
             LoadingWindowView()
         }
     }

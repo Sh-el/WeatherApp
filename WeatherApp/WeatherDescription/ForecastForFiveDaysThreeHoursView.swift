@@ -38,11 +38,6 @@ extension View {
     }
 }
 
-//struct ThreeHoursForecastView_Preview: PreviewProvider {
-//    static var previews: some View {
-//        ThreeHoursForecastView(index: 0)
-//            .environmentObject(WeatherViewModel())
-//    }
-//}
+
 
 

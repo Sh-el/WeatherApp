@@ -10,14 +10,12 @@ struct DetailThreeHoursView: View {
                 Text(list.dt.getDateStringFromUTC())
             }
             .font(.caption)
-            switch list.sys.pod {
-            case "d":
-                if let iconName = list.weather.first?.id {
+            if let iconName = list.weather.first?.id {
+                switch list.sys.pod {
+                case "d":
                     Image("\(iconName)")
                         .iconsModifier()
-                }
-            default:
-                if let iconName = list.weather.first?.id {
+                default:
                     Image("\(iconName)n")
                         .iconsModifier()
                 }

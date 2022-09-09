@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct ErrorOtherMainView: View {
+struct ErrorOtherForMainView: View {
     @EnvironmentObject var model: ForecastViewModel
     
     @State var timer = Timer.publish(
@@ -40,7 +40,7 @@ struct ErrorOtherMainView: View {
 
 struct ErrorAddressUnreachableForMainView_Previews: PreviewProvider {
     static var previews: some View {
-        ErrorOtherMainView()
+        ErrorOtherForMainView()
     }
 }
 

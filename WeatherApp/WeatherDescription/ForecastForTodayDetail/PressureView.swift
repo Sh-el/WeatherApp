@@ -24,8 +24,4 @@ struct PressureView: View {
     }
 }
 
-//struct PressureView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        PressureView(forecastTodayForCity: ForecastTodayModel.empty)
-//    }
-//}
+

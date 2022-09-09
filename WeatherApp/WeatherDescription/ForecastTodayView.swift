@@ -47,9 +47,4 @@ struct ForecastTodayView: View {
     }
 }
 
-//struct ForecastTodayView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ForecastTodayView(forecastTodayForCity: ForecastTodayModel.empty)
-//            .environmentObject(ForecastViewModel())
-//    }
-//}
+

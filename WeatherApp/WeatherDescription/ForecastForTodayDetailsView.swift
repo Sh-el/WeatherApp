@@ -21,9 +21,4 @@ struct ForecastForTodayDetailsView: View {
     }
 }
 
-//struct ForecastForDayDetailsView1_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ForecastForTodayDetailsView(forecastForCity: ForecastModel.Forecast.empty)
-//            .previewInterfaceOrientation(.portrait)
-//    }
-//}
+
