@@ -71,9 +71,3 @@ extension Image {
     }
 }
 
-//struct BackgrounColorGradientView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        BackgrounColorGradientView(index: 0)
-//            .environmentObject(WeatherViewModel())
-//    }
-//}

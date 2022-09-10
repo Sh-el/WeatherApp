@@ -35,36 +35,12 @@ struct AddCityListView: View {
                 .background(Color.gray.opacity(0.15))
                 .clipShape(RoundedRectangle(cornerRadius: 10))
                 .padding()
+                
                 if let geocodingForNewCity = newCityGeocodingList.geocodingForNewCity {
-                    List(geocodingForNewCity, id: \.id) {geocodingForNewCity in
-                        Button {
-                            let coord = ForecastTodayModel.CityCoord(
-                                lat: geocodingForNewCity.lat,
-                                lon: geocodingForNewCity.lon)
-                            model.forecastNewCity(coord)
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-                                isAddCityView = true
-                            }
-                        } label: {
-                            HStack {
-                                Text(geocodingForNewCity.name)
-                                    .fontWeight(.thin)
-                                Text(geocodingForNewCity.country)
-                                    .fontWeight(.thin)
-                                Text(geocodingForNewCity.state ?? "")
-                                    .fontWeight(.thin)
-                            }
-                            .font(.headline)
-                            .opacity(0.9)
-                            .lineLimit(1)
-                        }
-                        .sheet(isPresented: $isAddCityView) {
-                            AddCityView(isAddCityView: $isAddCityView,
-                                        isAddCity: $isAddCity,
-                                        selectedTab: $selectedTab)
-                        }
-                        .listRowBackground(Color.black)
-                    }
+                    ListView(geocodingForNewCity: geocodingForNewCity,
+                             isAddCityView: $isAddCityView,
+                             isAddCity: $isAddCity,
+                             selectedTab: $selectedTab)
                 } else if newCityGeocodingList.errorFetchForecast == .invalidRequest {
                     ErrorInvalidRequestForAddCityView()
                         .listRowBackground(Color.black)
@@ -85,10 +61,3 @@ struct AddCityListView: View {
     
 }
 
-//struct CityAddView_Previews: PreviewProvider {
-//
-//    static var previews: some View {
-//        AddCityView()
-//            .environmentObject(WeatherViewModel())
-//    }
-//}

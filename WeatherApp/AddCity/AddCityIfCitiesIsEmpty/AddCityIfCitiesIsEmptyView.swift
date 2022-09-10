@@ -39,8 +39,4 @@ struct AddCityIfCitiesIsEmptyView: View {
     
 }
 
-//struct AddCityifCitiesIsEmptyView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        AddCityIfCitiesIsEmptyView()
-//    }
-//}
+

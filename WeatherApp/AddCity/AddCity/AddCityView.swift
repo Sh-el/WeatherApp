@@ -20,6 +20,7 @@ struct AddCityView: View {
     
     var body: some View {
         if let forecastForNewCity = model.forecastForNewCity {
+            
             ZStack(alignment: .top) {
                 VStack {
                     WeatherDescriptionView(forecastForCity: forecastForNewCity)
@@ -51,6 +52,7 @@ struct AddCityView: View {
             }
             .background(BackgroundView(forecastTodayForSelectedCity: forecastForNewCity.forecastToday))
             .foregroundColor(Constants.textColor)
+            
         } else {
             LoadingWindowView()
         }

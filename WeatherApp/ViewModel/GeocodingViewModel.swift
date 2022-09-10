@@ -25,6 +25,7 @@ final class GeocodingViewModel: ObservableObject {
     init() {
         
         fetchGeocodingForCityPublisher
+        
             .map {result in
                 switch result {
                 case .failure:
@@ -36,20 +37,7 @@ final class GeocodingViewModel: ObservableObject {
             .assign(to: &$geocodingForNewCity)
         
         fetchGeocodingForCityPublisher
-            .map {result in
-                switch result {
-                case .failure(let error):
-                    if case API.RequestError.addressUnreachable = error {
-                        return API.RequestError.addressUnreachable}
-                    else if case API.RequestError.invalidRequest = error {
-                        return API.RequestError.invalidRequest}
-                    else if case API.RequestError.decodingError = error {
-                        return API.RequestError.decodingError}
-                    else {return API.RequestError.decodingError}
-                case .success:
-                    return API.RequestError.noError
-                }
-            }
+            .errorFetchGeocodingForCities()
             .assign(to: &$errorFetchForecast)
     }
     

@@ -61,9 +61,3 @@ struct ErrorInvalidRequestForMainView: View {
 }
 
 
-//struct ErrorView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ErrorView()
-//            .environmentObject(ForecastViewModel())
-//    }
-//}

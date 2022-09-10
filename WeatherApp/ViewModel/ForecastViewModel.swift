@@ -1,10 +1,6 @@
 import Foundation
 import Combine
 
-extension Publisher {
-    
-}
-
 final class ForecastViewModel: ObservableObject {
     
     @Published var forecastForCities: [ForecastModel.Forecast]? = nil
@@ -17,8 +13,8 @@ final class ForecastViewModel: ObservableObject {
     
     func forecastCities() {
         coordForCities = loadCitiesCoord()
-        //   let publisher = loadCitiesCoordFuture()
-        let publisher = coordForCities.publisher
+        let publisher = coordForCities
+            .publisher
             .flatMap (ForecastModel.fetchForecastForCitiesCoord)
             .share()
         
@@ -37,21 +33,7 @@ final class ForecastViewModel: ObservableObject {
         
         publisher
             .asResult()
- //           .errorDescription(self)
-            .map {result in
-                switch result {
-                case .failure(let error):
-                    if case API.RequestError.addressUnreachable = error {
-                        return API.RequestError.addressUnreachable}
-                    else if case API.RequestError.invalidRequest = error {
-                        return API.RequestError.invalidRequest}
-                    else if case API.RequestError.decodingError = error {
-                        return API.RequestError.decodingError}
-                    else {return API.RequestError.decodingError}
-                case .success:
-                    return API.RequestError.noError
-                }
-            }
+            .errorFetchForecastForCities()
             .receive(on: DispatchQueue.main)
             .assign(to: &$errorFetchForecast)
     }
@@ -77,20 +59,7 @@ final class ForecastViewModel: ObservableObject {
         
         publisher
             .asResult()
-            .map {result in
-                switch result {
-                case .failure(let error):
-                    if case API.RequestError.addressUnreachable = error {
-                        return API.RequestError.addressUnreachable}
-                    else if case API.RequestError.invalidRequest = error {
-                        return API.RequestError.invalidRequest}
-                    else if case API.RequestError.decodingError = error {
-                        return API.RequestError.decodingError}
-                    else {return API.RequestError.decodingError}
-                case .success:
-                    return API.RequestError.noError
-                }
-            }
+            .errorFetchForecastForCity()
             .receive(on: DispatchQueue.main)
             .assign(to: &$errorFetchForecast)
     }
@@ -122,12 +91,12 @@ final class ForecastViewModel: ObservableObject {
     
     func  removeCity(_ forecastModel: ForecastTodayModel)  {
         forecastForCities?.remove(
-            at: forecastForCities?
-                .firstIndex(where: {$0.forecastToday == forecastModel}) ?? 0
+            at: forecastForCities?.firstIndex(
+                where: {$0.forecastToday == forecastModel}) ?? 0
         )
         coordForCities?.remove(
-            at: coordForCities?
-                .firstIndex(where: {$0 == forecastModel.coord}) ?? 0
+            at: coordForCities?.firstIndex(
+                where: {$0 == forecastModel.coord}) ?? 0
         )
     }
     
@@ -176,15 +145,6 @@ final class ForecastViewModel: ObservableObject {
             return false
         }
     }
-    
-    //    func isCitiesEmpty() -> Bool {
-    //        let citiesCoord = loadCitiesCoord()
-    //        if citiesCoord.isEmpty {
-    //            return true
-    //        } else {
-    //            return false
-    //        }
-    //    }
     
     init() {
         forecastCities()
@@ -249,24 +209,65 @@ extension Publisher {
     }
 }
 
-//extension Publisher {
-//    func errorDescription<T>() -> AnyPublisher<T, Never> {
-//        self
-//          
-//            .map {result in
-//                switch result {
-//                case .failure(let error):
-//                    if case API.RequestError.addressUnreachable = error as! API.RequestError {
-//                        return API.RequestError.addressUnreachable as! T}
-//                    else if case API.RequestError.invalidRequest = error as! API.RequestError {
-//                        return API.RequestError.invalidRequest as! T}
-//                    else if case API.RequestError.decodingError = error as! API.RequestError {
-//                        return API.RequestError.decodingError as! T}
-//                    else {return API.RequestError.decodingError as! T}
-//                case .success:
-//                    return API.RequestError.noError as! T
-//                }
-//            }
-//            .eraseToAnyPublisher()
-//    }
-//}
+extension Publisher where Output == Result<Array<ForecastModel.Forecast>, Error>, Failure == Never {
+    func errorFetchForecastForCities() -> AnyPublisher<API.RequestError?, Never> {
+        self
+            .map {result  in
+                switch result {
+                case .failure(let error):
+                    if case API.RequestError.addressUnreachable = error  {
+                        return API.RequestError.addressUnreachable}
+                    else if case API.RequestError.invalidRequest = error  {
+                        return API.RequestError.invalidRequest}
+                    else if case API.RequestError.decodingError = error  {
+                        return API.RequestError.decodingError}
+                    else {return API.RequestError.decodingError}
+                case .success:
+                    return API.RequestError.noError
+                }
+            }
+            .eraseToAnyPublisher()
+    }
+}
+
+extension Publisher where Output == Result<ForecastModel.Forecast, Error>, Failure == Never {
+    func errorFetchForecastForCity() -> AnyPublisher<API.RequestError?, Never> {
+        self
+            .map {result  in
+                switch result {
+                case .failure(let error):
+                    if case API.RequestError.addressUnreachable = error  {
+                        return API.RequestError.addressUnreachable}
+                    else if case API.RequestError.invalidRequest = error  {
+                        return API.RequestError.invalidRequest}
+                    else if case API.RequestError.decodingError = error  {
+                        return API.RequestError.decodingError}
+                    else {return API.RequestError.decodingError}
+                case .success:
+                    return API.RequestError.noError
+                }
+            }
+            .eraseToAnyPublisher()
+    }
+}
+
+extension Publisher where Output == Result<Array<GeocodingModel.Geocoding>, Error>, Failure == Never {
+    func errorFetchGeocodingForCities() -> AnyPublisher<API.RequestError?, Never> {
+        self
+            .map {result  in
+                switch result {
+                case .failure(let error):
+                    if case API.RequestError.addressUnreachable = error  {
+                        return API.RequestError.addressUnreachable}
+                    else if case API.RequestError.invalidRequest = error  {
+                        return API.RequestError.invalidRequest}
+                    else if case API.RequestError.decodingError = error  {
+                        return API.RequestError.decodingError}
+                    else {return API.RequestError.decodingError}
+                case .success:
+                    return API.RequestError.noError
+                }
+            }
+            .eraseToAnyPublisher()
+    }
+}
