@@ -1,7 +1,7 @@
 import SwiftUI
 
-struct AddCityListView: View {
-    @EnvironmentObject var model: ForecastViewModel
+struct AddCityListView1: View {
+    @EnvironmentObject var model: ForecastViewModel1
     @StateObject var newCityGeocodingList = GeocodingViewModel()
     
     @State private var isAddCityView = false
@@ -38,7 +38,7 @@ struct AddCityListView: View {
                 .padding()
                 
                 if let geocodingForNewCity = newCityGeocodingList.geocodingForNewCity {
-                    ListView(geocodingForNewCity: geocodingForNewCity,
+                    ListView1(geocodingForNewCity: geocodingForNewCity,
                              isAddCityView: $isAddCityView,
                              isAddCity: $isAddCity,
                              selectedTab: $selectedTab)

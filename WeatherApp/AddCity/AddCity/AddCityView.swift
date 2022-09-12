@@ -2,6 +2,7 @@ import SwiftUI
 
 struct AddCityView: View {
     @EnvironmentObject var model: ForecastViewModel
+    
     @Binding var isAddCityView: Bool
     @Binding var isAddCity: Bool
     @Binding var selectedTab: ForecastTodayModel?

@@ -16,7 +16,7 @@ final class GeocodingViewModel: ObservableObject {
             .map {$0.replacingOccurrences(of: " ", with: "%20")}
             .flatMap(API.fetchURLForGeocoding)
             .replaceError(with: URL(string: "a")!) //bad
-            .flatMap {API.fetchForecastFromURL($0).asResult()}
+            .flatMap {API.fetchWeatherForecastForURL($0).asResult()}
             .share()
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()

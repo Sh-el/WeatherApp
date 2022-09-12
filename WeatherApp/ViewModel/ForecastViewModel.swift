@@ -15,7 +15,7 @@ final class ForecastViewModel: ObservableObject {
         coordForCities = loadCitiesCoord()
         let publisher = coordForCities
             .publisher
-            .flatMap (ForecastModel.fetchForecastForCitiesCoord)
+            .flatMap (ForecastModel.fetchWeatherForecastForCoordinatesOfCities)
             .share()
         
         publisher
@@ -41,7 +41,7 @@ final class ForecastViewModel: ObservableObject {
     func forecastNewCity(_ cityCoord: ForecastTodayModel.CityCoord) {
         forecastForNewCity = nil
         
-        let publisher = ForecastModel.fetchForecastForCityCoord(cityCoord)
+        let publisher = ForecastModel.fetchWeatherForecastForCoordinatesOfCity(cityCoord)
             .share()
         
         publisher

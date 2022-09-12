@@ -35,7 +35,7 @@ struct API {
         static let apiKey = "06d1fe9aeaf87501637b6638e8a5dbbf"
     }
     
-    static  func fetchURLForForecastToday(_ coord: ForecastTodayModel.CityCoord) -> AnyPublisher<URL, Error> {
+    static  func fetchURLForTodayWeatherForecast(_ coord: ForecastTodayModel.CityCoord) -> AnyPublisher<URL, Error> {
         Just(coord)
             .tryMap {
                 guard let url = URL(string: EndPoint.forecastTodayURL + "lat=\($0.lat)&lon=\($0.lon)" + "&limit=5" + "&appid=" + EndPoint.apiKey + "&units=metric")
@@ -47,7 +47,7 @@ struct API {
             .eraseToAnyPublisher()
     }
     
-    static  func fetchURLForFiveDaysThreeHours(_ coord: ForecastTodayModel.CityCoord) -> AnyPublisher<URL, Error> {
+    static  func fetchURLForWeatherForecastForThreeHourIntervalsForFiveDays(_ coord: ForecastTodayModel.CityCoord) -> AnyPublisher<URL, Error> {
         Just(coord)
             .tryMap {
                 guard let url = URL(string: EndPoint.forecastForFiveDaysThreeHoursURL + "lat=\($0.lat)&lon=\($0.lon)" + "&limit=5" + "&appid=" + EndPoint.apiKey + "&units=metric")
@@ -94,7 +94,7 @@ struct API {
             .eraseToAnyPublisher()
     }
     
-    static func fetchForecastFromURL<T: Decodable>(_ url: URL) -> AnyPublisher<T, Error> {
+    static func fetchWeatherForecastForURL<T: Decodable>(_ url: URL) -> AnyPublisher<T, Error> {
         let decoder = JSONDecoder()
         let apiQueue = DispatchQueue(label: "API", qos: .default, attributes: .concurrent)
         
