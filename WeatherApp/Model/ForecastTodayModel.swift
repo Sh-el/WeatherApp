@@ -9,6 +9,7 @@ struct ForecastTodayModel: Codable, Hashable {
         hasher.combine(name)
     }
     
+    
     let main: Main
     let wind: Wind
     let sys: Sys

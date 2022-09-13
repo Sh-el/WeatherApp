@@ -16,11 +16,9 @@ final class ForecastViewModel1: ObservableObject {
     
     @Published var forecastForCities: Result<Array<ForecastModel.Forecast>, Error>? = nil
     @Published var forecastForNewCity: Result<ForecastModel.Forecast, Error>? = nil
-    @Published var coordForCities: [ForecastTodayModel.CityCoord]? = nil
-    
     
     var subscriptions = Set<AnyCancellable>()
-    
+
     func weatherForecastForCoordinatesOfCities(_ coordForCities: [ForecastTodayModel.CityCoord]?) {
         coordForCities
             .publisher
@@ -28,10 +26,23 @@ final class ForecastViewModel1: ObservableObject {
             .asResult1()
             .receive(on: DispatchQueue.main)
             .assign(to: &$forecastForCities)
-      
     }
     
-    func resultForNewCity(_ cityCoord: ForecastTodayModel.CityCoord) {
+    func weatherForecastForCoordinatesOfNewCity1(_ cityCoord: ForecastTodayModel.CityCoord) ->  Result<ForecastModel.Forecast, Error>? {
+        var forecastForNewCity: Result<ForecastModel.Forecast, Error>? = nil
+        
+        ForecastModel.fetchWeatherForecastForCoordinatesOfCity(cityCoord)
+            .share()
+            .asResult1()
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: {value in
+                forecastForNewCity = value
+            })
+            .store(in: &subscriptions)
+        return forecastForNewCity
+    }
+    
+    func weatherForecastForCoordinatesOfNewCity(_ cityCoord: ForecastTodayModel.CityCoord) {
         forecastForNewCity = nil
         
         ForecastModel.fetchWeatherForecastForCoordinatesOfCity(cityCoord)
@@ -39,9 +50,8 @@ final class ForecastViewModel1: ObservableObject {
             .asResult1()
             .receive(on: DispatchQueue.main)
             .assign(to: &$forecastForNewCity)
-       
     }
-    
+   
     func loadCitiesCoord() -> [ForecastTodayModel.CityCoord] {
         var citiesCoord = [ForecastTodayModel.CityCoord]()
         if let url = FileManager.documentURL?.appendingPathComponent("CitiesCoord1") {
@@ -49,7 +59,6 @@ final class ForecastViewModel1: ObservableObject {
                 let data = try Data(contentsOf: url)
                 let decoder = JSONDecoder()
                 citiesCoord = try decoder.decode([ForecastTodayModel.CityCoord].self, from: data)
-                self.coordForCities = citiesCoord
             } catch {
                 citiesCoord = [ForecastTodayModel.CityCoord]()
             }
@@ -57,42 +66,31 @@ final class ForecastViewModel1: ObservableObject {
         return citiesCoord
     }
     
-    func loadCitiesCoordFuture() -> Future<[ForecastTodayModel.CityCoord], Never> {
-        Future {promise in
-            promise(.success(self.loadCitiesCoord()))
-        }
+    func appendCity(_ forecastForNewCity: ForecastModel.Forecast, _ forecastForCities: [ForecastModel.Forecast]) {
+        forecastForCities
+            .publisher
+            .append(forecastForNewCity)
+            .map{$0.forecastToday.coord}
+            .collect()
+            .sink(receiveValue: {[weak self] citiesCoord in
+                self?.save(citiesCoord)
+            })
+            .store(in: &subscriptions)
     }
-    
-//    func appendCity(_ forecastForNewCity: ForecastModel.Forecast) {
-//        forecastForCities?.append(forecastForNewCity)
-//        coordForCities?.append(forecastForNewCity.forecastToday.coord)
-//    }
-//
-    func  removeCity(removeCityModel : ForecastTodayModel, forecastForCities: [ForecastModel.Forecast])  {
+
+    func  removeCity(_ removeCityModel : ForecastTodayModel, _ forecastForCities: [ForecastModel.Forecast])  {
         forecastForCities
             .publisher
             .filter {$0.forecastToday != removeCityModel}
             .map{$0.forecastToday.coord}
             .collect()
             .sink(receiveValue: {[weak self] citiesCoord in
-                self?.saveCitiesCoord(citiesCoord)
-            })
-            .store(in: &subscriptions)
-      
-    }
-    
-    func saveCities(forecastForCities: [ForecastModel.Forecast]) {
-        forecastForCities
-            .publisher
-            .map {$0.forecastToday.coord}
-            .collect()
-            .sink(receiveValue: {[weak self] value in
-                self?.saveCitiesCoord(value)
+                self?.save(citiesCoord)
             })
             .store(in: &subscriptions)
     }
     
-    func saveCitiesCoord(_ citiesCoord: [ForecastTodayModel.CityCoord])  {
+    func save(_ citiesCoord: [ForecastTodayModel.CityCoord])  {
         do {
             let encoder = JSONEncoder()
             let data = try  encoder.encode(citiesCoord)
@@ -109,7 +107,6 @@ final class ForecastViewModel1: ObservableObject {
         on: .main,
         in: .common)
         .autoconnect()
-    
  
     private var timeIntreval1970 = NSDate().timeIntervalSince1970
     private var tommorow = Date().dayAfterMidnight.timeIntervalSince1970
@@ -124,7 +121,6 @@ final class ForecastViewModel1: ObservableObject {
     
     init() {
         weatherForecastForCoordinatesOfCities(loadCitiesCoord())
-        
     }
     
 }

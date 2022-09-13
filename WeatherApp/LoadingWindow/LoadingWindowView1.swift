@@ -23,15 +23,15 @@ struct LoadingWindowView1: View {
                 .foregroundColor(Constants.textColor)
             }
         }
-//        .onAppear {
-//            Task {
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
-//                    if model.errorFetchForecast == nil {
-//                        model.errorFetchForecast = .unknownError
-//                    }
-//                }
-//            }
-//        }
+        .onAppear {
+            Task {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                    if model.forecastForCities == nil {
+                        model.forecastForCities = .failure(API.RequestError.unknownError)
+                    }
+                }
+            }
+        }
         
     }
 }

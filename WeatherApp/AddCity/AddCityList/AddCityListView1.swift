@@ -4,20 +4,23 @@ struct AddCityListView1: View {
     @EnvironmentObject var model: ForecastViewModel1
     @StateObject var newCityGeocodingList = GeocodingViewModel()
     
+    var forecastForCities: [ForecastModel.Forecast]
     @State private var isAddCityView = false
     @Binding var isAddCity: Bool
     @Binding var selectedTab: ForecastTodayModel?
     
-    init(isAddCity: Binding<Bool>, selectedTab: Binding<ForecastTodayModel?>) {
+    init(isAddCity: Binding<Bool>, selectedTab: Binding<ForecastTodayModel?>, forecastForCities: [ForecastModel.Forecast]) {
         UITableView.appearance().backgroundColor = .clear
         self._isAddCity = isAddCity
         self._selectedTab = selectedTab
+        self.forecastForCities = forecastForCities
     }
     
-    init(isAddCity: Binding<Bool>) {
+    init(isAddCity: Binding<Bool>, forecastForCities: [ForecastModel.Forecast]) {
         UITableView.appearance().backgroundColor = .clear
         self._isAddCity = isAddCity
         self._selectedTab = .constant(nil)
+        self.forecastForCities = forecastForCities
     }
     
     var body: some View {
@@ -36,9 +39,9 @@ struct AddCityListView1: View {
                 .background(Color.gray.opacity(0.15))
                 .clipShape(RoundedRectangle(cornerRadius: 10))
                 .padding()
-                
                 if let geocodingForNewCity = newCityGeocodingList.geocodingForNewCity {
-                    ListView1(geocodingForNewCity: geocodingForNewCity,
+                    ListView1(forecastForCities: forecastForCities,
+                             geocodingForNewCity: geocodingForNewCity,
                              isAddCityView: $isAddCityView,
                              isAddCity: $isAddCity,
                              selectedTab: $selectedTab)

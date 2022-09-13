@@ -35,6 +35,7 @@ struct API {
         static let apiKey = "06d1fe9aeaf87501637b6638e8a5dbbf"
     }
     
+    
     static  func fetchURLForTodayWeatherForecast(_ coord: ForecastTodayModel.CityCoord) -> AnyPublisher<URL, Error> {
         Just(coord)
             .tryMap {

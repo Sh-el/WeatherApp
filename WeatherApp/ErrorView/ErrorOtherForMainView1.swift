@@ -1,7 +1,13 @@
 import SwiftUI
 
-struct LoadingWindowView: View {
-    @EnvironmentObject var model: ForecastViewModel
+struct ErrorOtherForMainView1: View {
+    @EnvironmentObject var model: ForecastViewModel1
+    
+    @State var timer = Timer.publish(
+        every: 30,
+        on: .main,
+        in: .common)
+        .autoconnect()
     
     var body: some View {
         GeometryReader {geo in
@@ -12,32 +18,21 @@ struct LoadingWindowView: View {
                     .scaledToFill()
                     .frame(width: geo.size.width, height: geo.size.height)
                 VStack {
-                    Text("Load forecast")
+                    Text("Weather information not available.")
                         .font(.title)
                         .fontWeight(.medium)
                         .multilineTextAlignment(.center)
                         .lineLimit(2)
-                        .padding()
-                    LoadingDotView()
+                    Text("Restart application.")
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(Color(hue: 0.593, saturation: 0.084, brightness: 0.892))
+                        .padding(.vertical, 3.0)
                 }
                 .foregroundColor(Constants.textColor)
-            }
-        }
-        .onAppear {
-            Task {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
-                    if model.errorFetchForecast == nil {
-                        model.errorFetchForecast = .unknownError
-                    }
-                }
             }
         }
         
     }
 }
 
-struct Load_Previews: PreviewProvider {
-    static var previews: some View {
-        LoadingWindowView()
-    }
-}
+

@@ -1,9 +1,10 @@
 import SwiftUI
 import CoreLocation
 
-struct LocationAccessAllowed: View {
-    @EnvironmentObject var model: ForecastViewModel
+struct LocationAccessAllowed1: View {
+    @EnvironmentObject var model: ForecastViewModel1
     
+    var forecastForCities: [ForecastModel.Forecast]
     @Binding var isAddCity: Bool
     @Binding var isAddCityView: Bool
     var lat, lon: Double
@@ -25,7 +26,7 @@ struct LocationAccessAllowed: View {
                         isAddCity = true
                     default:
                         let coord = ForecastTodayModel.CityCoord(lat: lat, lon: lon)
-                        model.forecastNewCity(coord)
+                        model.weatherForecastForCoordinatesOfNewCity(coord)
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
                             isAddCityView = true
                         }
@@ -35,12 +36,12 @@ struct LocationAccessAllowed: View {
                         .addCityIfCitiesIsEmptyButtonModifier()
                 }
                 .sheet(isPresented: $isAddCityView) {
-                    switch model.errorFetchForecast {
-                    case .invalidRequest:
-                        ErrorInvalidRequestForAddCityView()
-                    default:
-                        AddCityView(isAddCityView: $isAddCityView, isAddCity: $isAddCity)
-                    }
+//                    switch model.errorFetchForecast {
+//                    case .invalidRequest:
+//                        ErrorInvalidRequestForAddCityView()
+//                    default:
+                    AddCityView1(isAddCityView: $isAddCityView, isAddCity: $isAddCity, forecastForCities: forecastForCities)
+  //                  }
                 }
                 Button {
                     isAddCity = true

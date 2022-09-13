@@ -3,7 +3,11 @@ import Combine
 
 struct ForecastModel {
     
-    struct Forecast {
+    struct Forecast: Equatable {
+        static func == (lhs: ForecastModel.Forecast, rhs: ForecastModel.Forecast) -> Bool {
+            return lhs.id == rhs.id
+        }
+        
         var id = UUID()
         let forecastToday : ForecastTodayModel
         let forecastForFiveDaysThreeHours: ForecastForFiveDaysThreeHoursModel

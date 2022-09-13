@@ -1,7 +1,7 @@
 import SwiftUI
 
-struct ErrorInvalidRequestForMainView: View {
-    @EnvironmentObject var model: ForecastViewModel
+struct ErrorInvalidRequestForMainView1: View {
+    @EnvironmentObject var model: ForecastViewModel1
     
     @State var timer = Timer.publish(
         every: 5,
@@ -23,21 +23,21 @@ struct ErrorInvalidRequestForMainView: View {
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 50, height: 50)
                         .foregroundColor(Color(hue: 0.593, saturation: 0.084, brightness: 0.892))
-                    Text("Информация о погоде недоступна")
+                    Text("Weather information not available.")
                         .font(.title)
                         .fontWeight(.medium)
                         .multilineTextAlignment(.center)
                         .lineLimit(2)
                     VStack {
-                        Text("Приложение")
-                        Text("не подключено к интернету.")
-                        Text("Проверете подключение, затем повторите попытку.")
+                        Text("Application")
+                        Text("not connected to the internet.")
+                        Text("Check your connection, then try againу.")
                     }
                     .multilineTextAlignment(.center)
                     .foregroundColor(Color(hue: 0.593, saturation: 0.084, brightness: 0.892))
                     .padding(.vertical, 3.0)
                     
-                    Button("Перейти в настройки") {
+                    Button("Go to settings") {
                         settingOpener()
                     }
                     .padding(.vertical, 30.0)
@@ -45,8 +45,8 @@ struct ErrorInvalidRequestForMainView: View {
                 .foregroundColor(Constants.textColor)
             }
         }
-        .onReceive(timer) { _ in
-            model.forecastCities()
+        .onReceive(timer) {_ in
+            model.weatherForecastForCoordinatesOfCities(model.loadCitiesCoord())
         }
     }
     

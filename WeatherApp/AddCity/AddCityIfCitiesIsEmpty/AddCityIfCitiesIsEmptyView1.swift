@@ -2,22 +2,25 @@ import SwiftUI
 import MapKit
 import CoreLocation
 
-struct AddCityIfCitiesIsEmptyView: View {
-    @EnvironmentObject var model: ForecastViewModel
+struct AddCityIfCitiesIsEmptyView1: View {
+    @EnvironmentObject var model: ForecastViewModel1
     @ObservedObject private var locationManager = LocationManager()
+    
+    var forecastForCities: [ForecastModel.Forecast]
     @State private var isAddCityView = false
     @State private var isAddCity = false
     private let manager = CLLocationManager()
     
     var body: some View {
         let coordinate = self.locationManager.location != nil ? self.locationManager.location!.coordinate :  CLLocationCoordinate2D()
-        ZStack(alignment: .top) {
+       return ZStack(alignment: .top) {
             switch manager.authorizationStatus {
             case .denied:
                 LocationAccessDenied(isAddCity: $isAddCity)
             default:
                 MapViewForYourCoordinate()
-                LocationAccessAllowed(isAddCity: $isAddCity,
+                LocationAccessAllowed1(forecastForCities: forecastForCities,
+                                      isAddCity: $isAddCity,
                                       isAddCityView: $isAddCityView,
                                       lat: coordinate.latitude,
                                       lon: coordinate.longitude)
@@ -25,7 +28,7 @@ struct AddCityIfCitiesIsEmptyView: View {
         }
         .ignoresSafeArea()
         .sheet(isPresented: $isAddCity) {
-            AddCityListView(isAddCity: $isAddCity)
+            AddCityListView1(isAddCity: $isAddCity, forecastForCities: forecastForCities)
         }
     }
     
