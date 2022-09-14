@@ -7,19 +7,16 @@ struct AddCityListView1: View {
     var forecastForCities: [ForecastModel.Forecast]
     @State private var isAddCityView = false
     @Binding var isAddCity: Bool
-    @Binding var selectedTab: ForecastTodayModel?
     
     init(isAddCity: Binding<Bool>, selectedTab: Binding<ForecastTodayModel?>, forecastForCities: [ForecastModel.Forecast]) {
         UITableView.appearance().backgroundColor = .clear
         self._isAddCity = isAddCity
-        self._selectedTab = selectedTab
         self.forecastForCities = forecastForCities
     }
     
     init(isAddCity: Binding<Bool>, forecastForCities: [ForecastModel.Forecast]) {
         UITableView.appearance().backgroundColor = .clear
         self._isAddCity = isAddCity
-        self._selectedTab = .constant(nil)
         self.forecastForCities = forecastForCities
     }
     
@@ -43,8 +40,7 @@ struct AddCityListView1: View {
                     ListView1(forecastForCities: forecastForCities,
                              geocodingForNewCity: geocodingForNewCity,
                              isAddCityView: $isAddCityView,
-                             isAddCity: $isAddCity,
-                             selectedTab: $selectedTab)
+                             isAddCity: $isAddCity)
                 } else if newCityGeocodingList.errorFetchForecast == .invalidRequest {
                     ErrorInvalidRequestForAddCityView()
                         .listRowBackground(Color.black)

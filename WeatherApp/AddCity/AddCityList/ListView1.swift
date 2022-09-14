@@ -8,9 +8,9 @@ struct ListView1: View {
     var geocodingForNewCity: [GeocodingModel.Geocoding]
     @Binding var isAddCityView: Bool
     @Binding var isAddCity: Bool
-    @Binding var selectedTab: ForecastTodayModel?
     
     var body: some View {
+        
         List(geocodingForNewCity, id: \.id) {geocodingForNewCity in
             Button {
                 let coord = ForecastTodayModel.CityCoord(
@@ -36,10 +36,10 @@ struct ListView1: View {
             .sheet(isPresented: $isAddCityView) {
                 AddCityView1(isAddCityView: $isAddCityView,
                             isAddCity: $isAddCity,
-                             selectedTab: $selectedTab,
                              forecastForCities: forecastForCities)
             }
             .listRowBackground(Color.black)
         }
+        .scrollContentBackground(.hidden)
     }
 }

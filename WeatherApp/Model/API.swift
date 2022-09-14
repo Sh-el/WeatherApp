@@ -95,7 +95,36 @@ struct API {
             .eraseToAnyPublisher()
     }
     
-    static func fetchWeatherForecastForURL<T: Decodable>(_ url: URL) -> AnyPublisher<T, Error> {
+    static func fetchDataFromURLSession1(_ url: URL) -> AnyPublisher<Data, Error> {
+        URLSession
+            .shared
+            .dataTaskPublisher(for: url)
+            .mapError {error -> Error in
+                return RequestError.invalidRequest
+            }
+            .map(\.data)
+            .eraseToAnyPublisher()
+    }
+    
+    static func jsonDecodeDataFromURLSession1<T: Decodable>(_ data: Data) -> AnyPublisher<T, Error> {
+        let decoder = JSONDecoder()
+        
+        let dataTaskPublisher = Just(data)
+            .tryMap {data -> T in
+                do {
+                    return try decoder.decode(T.self, from: data)
+                }
+                catch {
+                    throw RequestError.decodingError
+                }
+            }
+        return dataTaskPublisher
+            .map{$0}
+            .eraseToAnyPublisher()
+    }
+    
+    
+    static func decodeDataFromURLSession<T: Decodable>(_ url: URL) -> AnyPublisher<T, Error> {
         let decoder = JSONDecoder()
         let apiQueue = DispatchQueue(label: "API", qos: .default, attributes: .concurrent)
         

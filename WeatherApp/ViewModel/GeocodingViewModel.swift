@@ -14,9 +14,10 @@ final class GeocodingViewModel: ObservableObject {
             .debounce(for: 1.0, scheduler: DispatchQueue.main)
             .removeDuplicates()
             .map {$0.replacingOccurrences(of: " ", with: "%20")}
+        
             .flatMap(API.fetchURLForGeocoding)
             .replaceError(with: URL(string: "a")!) //bad
-            .flatMap {API.fetchWeatherForecastForURL($0).asResult()}
+            .flatMap {API.decodeDataFromURLSession($0).asResult()}
             .share()
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
@@ -25,7 +26,6 @@ final class GeocodingViewModel: ObservableObject {
     init() {
         
         fetchGeocodingForCityPublisher
-        
             .map {result in
                 switch result {
                 case .failure:

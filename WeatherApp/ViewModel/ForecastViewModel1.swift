@@ -1,17 +1,6 @@
 import Foundation
 import Combine
 
-extension Publisher {
-    func asResult1() -> AnyPublisher<Result<Output, Failure>?, Never> {
-        self
-            .map(Result.success)
-            .catch {error in
-                Just(.failure(error))
-            }
-            .eraseToAnyPublisher()
-    }
-}
-
 final class ForecastViewModel1: ObservableObject {
     
     @Published var forecastForCities: Result<Array<ForecastModel.Forecast>, Error>? = nil
@@ -43,7 +32,6 @@ final class ForecastViewModel1: ObservableObject {
     }
     
     func weatherForecastForCoordinatesOfNewCity(_ cityCoord: ForecastTodayModel.CityCoord) {
-        forecastForNewCity = nil
         
         ForecastModel.fetchWeatherForecastForCoordinatesOfCity(cityCoord)
             .share()
@@ -78,14 +66,15 @@ final class ForecastViewModel1: ObservableObject {
             .store(in: &subscriptions)
     }
 
-    func  removeCity(_ removeCityModel : ForecastTodayModel, _ forecastForCities: [ForecastModel.Forecast])  {
+    func removeCity(_ removeCityModel : ForecastTodayModel, _ forecastForCities: [ForecastModel.Forecast])  {
         forecastForCities
             .publisher
             .filter {$0.forecastToday != removeCityModel}
             .map{$0.forecastToday.coord}
             .collect()
             .sink(receiveValue: {[weak self] citiesCoord in
-                self?.save(citiesCoord)
+                    self?.save(citiesCoord)
+                
             })
             .store(in: &subscriptions)
     }
@@ -123,6 +112,18 @@ final class ForecastViewModel1: ObservableObject {
         weatherForecastForCoordinatesOfCities(loadCitiesCoord())
     }
     
+}
+
+
+extension Publisher {
+    func asResult1() -> AnyPublisher<Result<Output, Failure>?, Never> {
+        self
+            .map(Result.success)
+            .catch {error in
+                Just(.failure(error))
+            }
+            .eraseToAnyPublisher()
+    }
 }
 
 extension Int {

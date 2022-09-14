@@ -6,14 +6,12 @@ struct AddCityView1: View {
     var forecastForCities: [ForecastModel.Forecast]
     @Binding var isAddCityView: Bool
     @Binding var isAddCity: Bool
-    @Binding var selectedTab: ForecastTodayModel?
     
     init(isAddCityView: Binding<Bool>,
          isAddCity: Binding<Bool>,
          forecastForCities: [ForecastModel.Forecast]) {
         self._isAddCityView = isAddCityView
         self._isAddCity = isAddCity
-        self._selectedTab = .constant(nil)
         self.forecastForCities = forecastForCities
     }
     
@@ -23,7 +21,6 @@ struct AddCityView1: View {
          forecastForCities: [ForecastModel.Forecast]) {
         self._isAddCityView = isAddCityView
         self._isAddCity = isAddCity
-        self._selectedTab = selectedTab
         self.forecastForCities = forecastForCities
     }
     
@@ -41,7 +38,6 @@ struct AddCityView1: View {
                             Button {
                                 model.appendCity(forecast, forecastForCities)
                                 model.weatherForecastForCoordinatesOfCities(model.loadCitiesCoord())
-                                selectedTab = forecast.forecastToday
                                 isAddCityView = false
                                 isAddCity = false
                             } label: {

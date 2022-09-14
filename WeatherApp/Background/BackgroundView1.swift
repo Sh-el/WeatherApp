@@ -63,12 +63,12 @@ struct BackgroundView1: View {
     }
 }
 
-//extension Image {
-//    func bacgroundImagesModifier() -> some View {
-//        return self
-//            .resizable()
-//            .ignoresSafeArea()
-//            .scaledToFill()
-//    }
-//}
+extension Image {
+    func bacgroundImagesModifier() -> some View {
+        return self
+            .resizable()
+            .ignoresSafeArea()
+            .scaledToFill()
+    }
+}
 

@@ -15,7 +15,6 @@
 		249672A6285EEAE40072BA93 /* WeatherAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249672A5285EEAE40072BA93 /* WeatherAppApp.swift */; };
 		249672AA285EEAE50072BA93 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 249672A9285EEAE50072BA93 /* Assets.xcassets */; };
 		249672AD285EEAE50072BA93 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 249672AC285EEAE50072BA93 /* Preview Assets.xcassets */; };
-		24BC32F228780E6F004CF901 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BC32F128780E6F004CF901 /* BackgroundView.swift */; };
 		24FE69592879D78B00E8AEEA /* ForecastTodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24FE69582879D78B00E8AEEA /* ForecastTodayView.swift */; };
 		DF0E011B28B2323700752A57 /* MapViewForYourCoordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0E011A28B2323700752A57 /* MapViewForYourCoordinate.swift */; };
 		DF237BE2289DA42F004D7AC3 /* GeocodingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF237BE1289DA42F004D7AC3 /* GeocodingViewModel.swift */; };
@@ -40,7 +39,6 @@
 		DFAEE9E828B7711400B509F1 /* ErrorInvalidRequestForAddCityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFAEE9E728B7711400B509F1 /* ErrorInvalidRequestForAddCityView.swift */; };
 		DFB47A3F28BA0D19002B440E /* IconsModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB47A3E28BA0D19002B440E /* IconsModifier.swift */; };
 		DFB47A4128BA0E0B002B440E /* AddCityIfCitiesIsEmptyButtonModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB47A4028BA0E0B002B440E /* AddCityIfCitiesIsEmptyButtonModifier.swift */; };
-		DFB47A4328BB4262002B440E /* ErrorOtherForMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB47A4228BB4262002B440E /* ErrorOtherForMainView.swift */; };
 		DFB47A4728BF46CA002B440E /* LoadingDotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB47A4628BF46CA002B440E /* LoadingDotView.swift */; };
 		DFB47A5228BFB1B7002B440E /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB47A5128BFB1B7002B440E /* API.swift */; };
 		DFB91FD228CC56940081DD56 /* ForecastViewModel1.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB91FD128CC56940081DD56 /* ForecastViewModel1.swift */; };
@@ -56,6 +54,8 @@
 		DFB91FE628CF123B0081DD56 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB91FE528CF123B0081DD56 /* ErrorView.swift */; };
 		DFB91FE828CF299E0081DD56 /* AddCityIfCitiesIsEmptyView1.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB91FE728CF299E0081DD56 /* AddCityIfCitiesIsEmptyView1.swift */; };
 		DFB91FEA28CF29F20081DD56 /* LocationAccessAllowed1.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB91FE928CF29F20081DD56 /* LocationAccessAllowed1.swift */; };
+		DFC7F24E28D1073300CE0032 /* RemoveCitiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC7F24D28D1073300CE0032 /* RemoveCitiesView.swift */; };
+		DFC7F25028D10AEB00CE0032 /* GeocodingViewModel1.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC7F24F28D10AEB00CE0032 /* GeocodingViewModel1.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,7 +69,6 @@
 		249672A5285EEAE40072BA93 /* WeatherAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAppApp.swift; sourceTree = "<group>"; };
 		249672A9285EEAE50072BA93 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		249672AC285EEAE50072BA93 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		24BC32F128780E6F004CF901 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		24FE69582879D78B00E8AEEA /* ForecastTodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastTodayView.swift; sourceTree = "<group>"; };
 		DF0E011A28B2323700752A57 /* MapViewForYourCoordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewForYourCoordinate.swift; sourceTree = "<group>"; };
 		DF237BE1289DA42F004D7AC3 /* GeocodingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeocodingViewModel.swift; sourceTree = "<group>"; };
@@ -94,7 +93,6 @@
 		DFAEE9E728B7711400B509F1 /* ErrorInvalidRequestForAddCityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorInvalidRequestForAddCityView.swift; sourceTree = "<group>"; };
 		DFB47A3E28BA0D19002B440E /* IconsModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconsModifier.swift; sourceTree = "<group>"; };
 		DFB47A4028BA0E0B002B440E /* AddCityIfCitiesIsEmptyButtonModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCityIfCitiesIsEmptyButtonModifier.swift; sourceTree = "<group>"; };
-		DFB47A4228BB4262002B440E /* ErrorOtherForMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorOtherForMainView.swift; sourceTree = "<group>"; };
 		DFB47A4628BF46CA002B440E /* LoadingDotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingDotView.swift; sourceTree = "<group>"; };
 		DFB47A5128BFB1B7002B440E /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		DFB91FD128CC56940081DD56 /* ForecastViewModel1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastViewModel1.swift; sourceTree = "<group>"; };
@@ -110,6 +108,8 @@
 		DFB91FE528CF123B0081DD56 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		DFB91FE728CF299E0081DD56 /* AddCityIfCitiesIsEmptyView1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCityIfCitiesIsEmptyView1.swift; sourceTree = "<group>"; };
 		DFB91FE928CF29F20081DD56 /* LocationAccessAllowed1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationAccessAllowed1.swift; sourceTree = "<group>"; };
+		DFC7F24D28D1073300CE0032 /* RemoveCitiesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveCitiesView.swift; sourceTree = "<group>"; };
+		DFC7F24F28D10AEB00CE0032 /* GeocodingViewModel1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeocodingViewModel1.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +137,7 @@
 				DF7984CC28929A4500A4C718 /* ForecastViewModel.swift */,
 				DFB91FD128CC56940081DD56 /* ForecastViewModel1.swift */,
 				DF237BE1289DA42F004D7AC3 /* GeocodingViewModel.swift */,
+				DFC7F24F28D10AEB00CE0032 /* GeocodingViewModel1.swift */,
 				DF32AEF828B21502006AD468 /* LocationManager.swift */,
 			);
 			path = ViewModel;
@@ -170,6 +171,7 @@
 				DFAEE9E928B7758D00B509F1 /* Buttons */,
 				DF3371AB28A0F56A00585676 /* WeatherDescription */,
 				DF0E011E28B2811000752A57 /* AddCity */,
+				DFC7F24C28D106E600CE0032 /* RemoveCities */,
 				DFBB4C0628C75D8500233A3E /* Background */,
 				DF3371AD28A0F65D00585676 /* ErrorView */,
 				DF3371BD28A2CBE000585676 /* Modifiers */,
@@ -242,7 +244,6 @@
 			children = (
 				DFB91FE528CF123B0081DD56 /* ErrorView.swift */,
 				DFB91FE128CF10740081DD56 /* ErrorInvalidRequestForMainView1.swift */,
-				DFB47A4228BB4262002B440E /* ErrorOtherForMainView.swift */,
 				DFB91FE328CF11650081DD56 /* ErrorOtherForMainView1.swift */,
 				DFAEE9E728B7711400B509F1 /* ErrorInvalidRequestForAddCityView.swift */,
 			);
@@ -318,10 +319,17 @@
 		DFBB4C0628C75D8500233A3E /* Background */ = {
 			isa = PBXGroup;
 			children = (
-				24BC32F128780E6F004CF901 /* BackgroundView.swift */,
 				DFB91FD728CCC3360081DD56 /* BackgroundView1.swift */,
 			);
 			path = Background;
+			sourceTree = "<group>";
+		};
+		DFC7F24C28D106E600CE0032 /* RemoveCities */ = {
+			isa = PBXGroup;
+			children = (
+				DFC7F24D28D1073300CE0032 /* RemoveCitiesView.swift */,
+			);
+			path = RemoveCities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -417,12 +425,10 @@
 				DF32AEF728AFE5C8006AD468 /* AirPollutionView.swift in Sources */,
 				DF948A7D28C9CDC300FD6E9B /* LocationAccessDenied.swift in Sources */,
 				DFAEE9E828B7711400B509F1 /* ErrorInvalidRequestForAddCityView.swift in Sources */,
-				24BC32F228780E6F004CF901 /* BackgroundView.swift in Sources */,
 				24FE69592879D78B00E8AEEA /* ForecastTodayView.swift in Sources */,
 				DF9345A128AE16EF00FC1A8D /* ButtonAddCity.swift in Sources */,
 				DFB47A4128BA0E0B002B440E /* AddCityIfCitiesIsEmptyButtonModifier.swift in Sources */,
 				DF3371BC28A2C9AB00585676 /* AirPollutionModel.swift in Sources */,
-				DFB47A4328BB4262002B440E /* ErrorOtherForMainView.swift in Sources */,
 				DF32AEF928B21502006AD468 /* LocationManager.swift in Sources */,
 				DFB91FE028CCD6520081DD56 /* LoadingWindowView1.swift in Sources */,
 				DFB91FE428CF11650081DD56 /* ErrorOtherForMainView1.swift in Sources */,
@@ -436,7 +442,9 @@
 				DF237BE2289DA42F004D7AC3 /* GeocodingViewModel.swift in Sources */,
 				DFA339DB28AAB3580040EB9A /* ForecastModel.swift in Sources */,
 				2482B218287582B6009A0178 /* Constants.swift in Sources */,
+				DFC7F25028D10AEB00CE0032 /* GeocodingViewModel1.swift in Sources */,
 				DFB47A5228BFB1B7002B440E /* API.swift in Sources */,
+				DFC7F24E28D1073300CE0032 /* RemoveCitiesView.swift in Sources */,
 				DFB91FDC28CCD49A0081DD56 /* AddCityListView1.swift in Sources */,
 				248AB21D2876EF8F00732A42 /* DetailThreeHoursView.swift in Sources */,
 				249672A6285EEAE40072BA93 /* WeatherAppApp.swift in Sources */,
@@ -582,6 +590,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -616,6 +625,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
