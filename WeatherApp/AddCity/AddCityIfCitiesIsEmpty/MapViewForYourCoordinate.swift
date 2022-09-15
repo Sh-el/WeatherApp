@@ -33,9 +33,7 @@ struct MapViewForYourCoordinate: UIViewRepresentable {
         Coordinator(self)
     }
     
-    func updateUIView(_ uiView: MKMapView, context: UIViewRepresentableContext<MapViewForYourCoordinate>) {
-        //
-    }
+    func updateUIView(_ uiView: MKMapView, context: UIViewRepresentableContext<MapViewForYourCoordinate>) { }
 }
 
 

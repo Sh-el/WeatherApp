@@ -1,15 +1,22 @@
 import SwiftUI
 
 struct RemoveCitiesView: View {
-    @EnvironmentObject var model: ForecastViewModel1
-    var forecastForCities: [ForecastModel.Forecast]
+    @EnvironmentObject var model: ForecastViewModel
     
+    var forecastForCities: [ForecastModel.Forecast]
+    @Binding var selectedTab: ForecastTodayModel?
+  
     var body: some View {
         List(forecastForCities, id: \.id) {forecastForCity in
             HStack {
                 Button {
-                    model.removeCity(forecastForCity.forecastToday, forecastForCities)
-                    model.weatherForecastForCoordinatesOfCities(model.loadCitiesCoord())
+                    DispatchQueue.global(qos: .userInteractive).async {
+                        model.removeCity(forecastForCity.forecastToday, forecastForCities)
+                        model.weatherForecastForCoordinatesOfCities(model.loadCitiesCoord())
+                    }
+                    if let selectedTab = model.selectedTab(forecastForCity.forecastToday, forecastForCities) {
+                        self.selectedTab = selectedTab
+                    }
                 } label: {
                     Image(systemName: "minus.circle.fill")
                         .foregroundColor(.red)
@@ -22,14 +29,16 @@ struct RemoveCitiesView: View {
                 Spacer()
                 Text("\(String(Int(forecastForCity.forecastToday.main.temp))) \u{2103}")
                     .fontWeight(.bold)
+                    .padding(.leading, 10)
             }
             .font(.title3)
             .foregroundColor(.white)
             .opacity(0.9)
             .lineLimit(1)
+            .padding(.bottom, 20)
             .listRowBackground(Color.black)
         }
-        .scrollContentBackground(.hidden)
+     //   .scrollContentBackground(.hidden)
         .background(Color.black)
     }
 }

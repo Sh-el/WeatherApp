@@ -1,16 +1,16 @@
 
 import SwiftUI
 
-struct ListView1: View {
-    @EnvironmentObject var model: ForecastViewModel1
+struct ListView: View {
+    @EnvironmentObject var model: ForecastViewModel
     
     var forecastForCities: [ForecastModel.Forecast]
     var geocodingForNewCity: [GeocodingModel.Geocoding]
+    @Binding var selectedTab: ForecastTodayModel?
     @Binding var isAddCityView: Bool
     @Binding var isAddCity: Bool
     
     var body: some View {
-        
         List(geocodingForNewCity, id: \.id) {geocodingForNewCity in
             Button {
                 let coord = ForecastTodayModel.CityCoord(
@@ -34,12 +34,14 @@ struct ListView1: View {
                 .lineLimit(1)
             }
             .sheet(isPresented: $isAddCityView) {
-                AddCityView1(isAddCityView: $isAddCityView,
+                AddCityView(isAddCityView: $isAddCityView,
                             isAddCity: $isAddCity,
-                             forecastForCities: forecastForCities)
+                            selectedTab: $selectedTab,
+                            forecastForCities: forecastForCities)
             }
             .listRowBackground(Color.black)
         }
-        .scrollContentBackground(.hidden)
+        .background(Color.black)
+      //  .scrollContentBackground(.hidden)
     }
 }

@@ -6,11 +6,12 @@ struct ErrorView: View {
     var body: some View {
         switch error {
         case API.RequestError.invalidRequest:
-            ErrorInvalidRequestForMainView1()
+            InvalidRequest()
+        case API.RequestError.decodingError:
+            DecodingError()
         default:
-            ErrorOtherForMainView1()
+            ErrorOther()
         }
-    
     }
 }
 

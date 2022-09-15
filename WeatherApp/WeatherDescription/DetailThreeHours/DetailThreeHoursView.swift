@@ -29,10 +29,3 @@ struct DetailThreeHoursView: View {
 }
 
 
-
-//struct DescriptionForThreeHours_Previews: PreviewProvider {
-//    static var previews: some View {
-//        DetailThreeHoursView(index: 1, i: 1)
-//            .environmentObject(WeatherViewModel())
-//    }
-//}

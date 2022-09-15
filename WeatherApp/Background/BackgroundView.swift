@@ -1,7 +1,7 @@
 import SwiftUI
 
-struct BackgroundView1: View {
-    @EnvironmentObject var model: ForecastViewModel1
+struct BackgroundView: View {
+    @EnvironmentObject var model: ForecastViewModel
     
     var forecastTodayForSelectedCity: ForecastTodayModel
     

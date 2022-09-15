@@ -111,13 +111,6 @@ struct DetailRain: View {
                 .opacity(0.7)
         }
     }
-    
 }
 
 
-//struct FiveDaysForecastView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        FiveDaysForecastView(index: 0)
-//            .environmentObject(WeatherViewModel())
-//    }
-//}

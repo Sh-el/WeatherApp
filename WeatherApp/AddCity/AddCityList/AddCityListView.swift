@@ -1,23 +1,27 @@
 import SwiftUI
 
-struct AddCityListView1: View {
-    @EnvironmentObject var model: ForecastViewModel1
+struct AddCityListView: View {
+    @EnvironmentObject var model: ForecastViewModel
     @StateObject var newCityGeocodingList = GeocodingViewModel()
     
     var forecastForCities: [ForecastModel.Forecast]
+    @Binding var selectedTab: ForecastTodayModel?
     @State private var isAddCityView = false
     @Binding var isAddCity: Bool
     
-    init(isAddCity: Binding<Bool>, selectedTab: Binding<ForecastTodayModel?>, forecastForCities: [ForecastModel.Forecast]) {
-        UITableView.appearance().backgroundColor = .clear
+    init(isAddCity: Binding<Bool>,
+         forecastForCities: [ForecastModel.Forecast],
+         selectedTab: Binding<ForecastTodayModel?>) {
         self._isAddCity = isAddCity
         self.forecastForCities = forecastForCities
+        self._selectedTab = selectedTab
     }
     
+    //init for AddCityIfCitiesIsEmptyView
     init(isAddCity: Binding<Bool>, forecastForCities: [ForecastModel.Forecast]) {
-        UITableView.appearance().backgroundColor = .clear
         self._isAddCity = isAddCity
         self.forecastForCities = forecastForCities
+        self._selectedTab = .constant(nil)
     }
     
     var body: some View {
@@ -36,14 +40,18 @@ struct AddCityListView1: View {
                 .background(Color.gray.opacity(0.15))
                 .clipShape(RoundedRectangle(cornerRadius: 10))
                 .padding()
-                if let geocodingForNewCity = newCityGeocodingList.geocodingForNewCity {
-                    ListView1(forecastForCities: forecastForCities,
+                
+                switch newCityGeocodingList.geocodingForNewCity {
+                case .success(let geocodingForNewCity):
+                    ListView(forecastForCities: forecastForCities,
                              geocodingForNewCity: geocodingForNewCity,
+                             selectedTab: $selectedTab,
                              isAddCityView: $isAddCityView,
                              isAddCity: $isAddCity)
-                } else if newCityGeocodingList.errorFetchForecast == .invalidRequest {
-                    ErrorInvalidRequestForAddCityView()
-                        .listRowBackground(Color.black)
+                case .failure(let error):
+                    ErrorView(error: error)
+                default:
+                    LoadingWindowView()
                 }
                 Spacer()
             }

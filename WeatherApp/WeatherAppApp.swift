@@ -2,11 +2,15 @@ import SwiftUI
 
 @main
 struct WeatherAppApp: App {
-    let  model = ForecastViewModel1()
+    let  model = ForecastViewModel()
+    
+    init() {
+        UITableView.appearance().backgroundColor = .black
+    }
     
     var body: some Scene {
         WindowGroup {
-            MainView1()
+            MainView()
                 .environmentObject(model)
                 .onReceive(model.timer) {_ in
                     model.weatherForecastForCoordinatesOfCities(model.loadCitiesCoord())

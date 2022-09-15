@@ -8,7 +8,7 @@ struct ForecastForFiveDaysThreeHoursModel: Codable {
     struct City: Codable {
         let id: Int
         let name: String
-        //      let country: String
+//      let country: String
     }
     
     struct List: Codable {

@@ -2,8 +2,8 @@ import SwiftUI
 import MapKit
 import CoreLocation
 
-struct AddCityIfCitiesIsEmptyView1: View {
-    @EnvironmentObject var model: ForecastViewModel1
+struct AddCityIfCitiesIsEmptyView: View {
+    @EnvironmentObject var model: ForecastViewModel
     @ObservedObject private var locationManager = LocationManager()
     
     var forecastForCities: [ForecastModel.Forecast]
@@ -19,7 +19,7 @@ struct AddCityIfCitiesIsEmptyView1: View {
                 LocationAccessDenied(isAddCity: $isAddCity)
             default:
                 MapViewForYourCoordinate()
-                LocationAccessAllowed1(forecastForCities: forecastForCities,
+                LocationAccessAllowed(forecastForCities: forecastForCities,
                                       isAddCity: $isAddCity,
                                       isAddCityView: $isAddCityView,
                                       lat: coordinate.latitude,
@@ -28,7 +28,7 @@ struct AddCityIfCitiesIsEmptyView1: View {
         }
         .ignoresSafeArea()
         .sheet(isPresented: $isAddCity) {
-            AddCityListView1(isAddCity: $isAddCity, forecastForCities: forecastForCities)
+            AddCityListView(isAddCity: $isAddCity, forecastForCities: forecastForCities)
         }
     }
     

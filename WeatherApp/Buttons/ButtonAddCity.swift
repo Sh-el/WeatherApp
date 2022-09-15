@@ -19,8 +19,3 @@ struct ButtonAddCity: View {
     }
 }
 
-//struct ButtonAddCity1_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ButtonAddCity1()
-//    }
-//}

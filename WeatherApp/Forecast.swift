@@ -1,15 +1,14 @@
 import SwiftUI
 
-struct Forecast1: View {
-    @EnvironmentObject var model: ForecastViewModel1
+struct Forecast: View {
+    @EnvironmentObject var model: ForecastViewModel
     
     var forecastForCities: [ForecastModel.Forecast]
+    @State private var selectedTab: ForecastTodayModel?
     @State private var isAddCity = false
     @State private var isRemoveCity = false
-    @State var selectedTab: ForecastTodayModel
     
     init(forecastForCities: [ForecastModel.Forecast]) {
-        UITableView.appearance().backgroundColor = .clear
         self.forecastForCities = forecastForCities
         self._selectedTab = State(initialValue: forecastForCities.first!.forecastToday)
     }
@@ -22,16 +21,19 @@ struct Forecast1: View {
                     ButtonAddCity(isAddCity: $isAddCity)
                     WeatherDescriptionView(forecastForCity: forecastForCity)
                 }
-                .tag(forecastForCity.forecastToday)
+                .tag(Optional(forecastForCity.forecastToday))
             }
         }
         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
-        .background(BackgroundView1(forecastTodayForSelectedCity: selectedTab))
+        .background(BackgroundView(forecastTodayForSelectedCity: selectedTab!))
         .sheet(isPresented: $isAddCity) {
-            AddCityListView1(isAddCity: $isAddCity, forecastForCities: forecastForCities)
+            AddCityListView(isAddCity: $isAddCity,
+                             forecastForCities: forecastForCities,
+                             selectedTab: $selectedTab)
         }
         .sheet(isPresented: $isRemoveCity) {
-            RemoveCitiesView(forecastForCities: forecastForCities)
+            RemoveCitiesView(forecastForCities: forecastForCities,
+                             selectedTab: $selectedTab)
         }
     }
 }

@@ -1,20 +1,20 @@
 import SwiftUI
 
-struct MainView1: View {
-    @EnvironmentObject var model: ForecastViewModel1
+struct MainView: View {
+    @EnvironmentObject var model: ForecastViewModel
     
     var body: some View {
         switch model.forecastForCities {
         case .success(let forecast):
             if forecast.isEmpty {
-                AddCityIfCitiesIsEmptyView1(forecastForCities: forecast)
+                AddCityIfCitiesIsEmptyView(forecastForCities: forecast)
             } else {
-                Forecast1(forecastForCities: forecast)
+                Forecast(forecastForCities: forecast)
             }
         case .failure(let error):
             ErrorView(error: error)
         default:
-            LoadingWindowView1()
+            LoadingWindowView()
         }
     }
     

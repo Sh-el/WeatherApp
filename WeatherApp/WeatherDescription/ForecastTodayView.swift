@@ -9,7 +9,7 @@ struct ForecastTodayView: View {
                 .font(.title)
                 .fontWeight(.regular)
                 .lineLimit(2)
-                .frame(width: 260)
+                .frame(width: 230)
                 .padding(.top, 10)
             Text("\(String(Int(forecastTodayForCity.main.temp))) \u{2103}")
                 .font(.system(size: 60.0))

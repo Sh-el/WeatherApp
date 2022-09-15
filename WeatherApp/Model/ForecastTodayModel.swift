@@ -9,7 +9,6 @@ struct ForecastTodayModel: Codable, Hashable {
         hasher.combine(name)
     }
     
-    
     let main: Main
     let wind: Wind
     let sys: Sys
@@ -53,7 +52,7 @@ struct ForecastTodayModel: Codable, Hashable {
         enum CodingKeys: String, CodingKey {
             case id, main
             case weatherDescription = "description"
-            //          case icon
+//          case icon
         }
     }
     

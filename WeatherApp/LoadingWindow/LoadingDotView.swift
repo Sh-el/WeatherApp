@@ -29,8 +29,3 @@ struct LoadingDotView: View {
     }
 }
 
-struct LoadingView_Previews: PreviewProvider {
-    static var previews: some View {
-        LoadingDotView()
-    }
-}

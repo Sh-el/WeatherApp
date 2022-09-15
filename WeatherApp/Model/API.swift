@@ -95,18 +95,7 @@ struct API {
             .eraseToAnyPublisher()
     }
     
-    static func fetchDataFromURLSession1(_ url: URL) -> AnyPublisher<Data, Error> {
-        URLSession
-            .shared
-            .dataTaskPublisher(for: url)
-            .mapError {error -> Error in
-                return RequestError.invalidRequest
-            }
-            .map(\.data)
-            .eraseToAnyPublisher()
-    }
-    
-    static func jsonDecodeDataFromURLSession1<T: Decodable>(_ data: Data) -> AnyPublisher<T, Error> {
+    static func jsonDecodeDataFromURLSession<T: Decodable>(_ data: Data) -> AnyPublisher<T, Error> {
         let decoder = JSONDecoder()
         
         let dataTaskPublisher = Just(data)
@@ -122,40 +111,7 @@ struct API {
             .map{$0}
             .eraseToAnyPublisher()
     }
-    
-    
-    static func decodeDataFromURLSession<T: Decodable>(_ url: URL) -> AnyPublisher<T, Error> {
-        let decoder = JSONDecoder()
-        let apiQueue = DispatchQueue(label: "API", qos: .default, attributes: .concurrent)
-        
-        let dataTaskPublisher = fetchDataFromURLSession(url)
-            .tryMap {data -> T in
-                do {
-                    return try decoder.decode(T.self, from: data)
-                }
-                catch {
-                    throw RequestError.decodingError
-                }
-            }
-        return dataTaskPublisher
-            .tryCatch {error -> AnyPublisher<T, Error> in
-                if case RequestError.decodingError = error {
-                    return Just(())
-                        .delay(for: 0.1, scheduler: apiQueue)
-                        .flatMap {_ in
-                            return dataTaskPublisher
-                        }
-                        .retry(3)
-                        .eraseToAnyPublisher()
-                }
-                throw error
-            }
-            .map{$0}
-            .eraseToAnyPublisher()
-    }
-    
-   
-    
+
 }
 
 

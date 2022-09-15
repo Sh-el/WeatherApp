@@ -3,67 +3,28 @@ import Combine
 
 final class ForecastViewModel: ObservableObject {
     
-    @Published var forecastForCities: [ForecastModel.Forecast]? = nil
-    @Published var forecastForNewCity: ForecastModel.Forecast? = nil
-    @Published var coordForCities: [ForecastTodayModel.CityCoord]? = nil
-    
-    @Published var errorFetchForecast: API.RequestError? = nil
+    @Published var forecastForCities: Result<Array<ForecastModel.Forecast>, Error>? = nil
+    @Published var forecastForNewCity: Result<ForecastModel.Forecast, Error>? = nil
     
     var subscriptions = Set<AnyCancellable>()
-    
-    func forecastCities() {
-        coordForCities = loadCitiesCoord()
-        let publisher = coordForCities
+
+    func weatherForecastForCoordinatesOfCities(_ coordForCities: [ForecastTodayModel.CityCoord]?) {
+        coordForCities
             .publisher
             .flatMap (ForecastModel.fetchWeatherForecastForCoordinatesOfCities)
-            .share()
-        
-        publisher
-            .asResult()
-            .map {result in
-                switch result {
-                case .failure:
-                    return nil
-                case .success(let weather):
-                    return weather
-                }
-            }
+            .asResultOptional()
             .receive(on: DispatchQueue.main)
             .assign(to: &$forecastForCities)
-        
-        publisher
-            .asResult()
-            .errorFetchForecastForCities()
-            .receive(on: DispatchQueue.main)
-            .assign(to: &$errorFetchForecast)
     }
     
-    func forecastNewCity(_ cityCoord: ForecastTodayModel.CityCoord) {
-        forecastForNewCity = nil
-        
-        let publisher = ForecastModel.fetchWeatherForecastForCoordinatesOfCity(cityCoord)
+    func weatherForecastForCoordinatesOfNewCity(_ cityCoord: ForecastTodayModel.CityCoord) {
+        ForecastModel.fetchWeatherForecastForCoordinatesOfCity(cityCoord)
             .share()
-        
-        publisher
-            .asResult()
-            .map {result in
-                switch result {
-                case .failure:
-                    return nil
-                case .success(let weather):
-                    return weather
-                }
-            }
+            .asResultOptional()
             .receive(on: DispatchQueue.main)
             .assign(to: &$forecastForNewCity)
-        
-        publisher
-            .asResult()
-            .errorFetchForecastForCity()
-            .receive(on: DispatchQueue.main)
-            .assign(to: &$errorFetchForecast)
     }
-    
+   
     func loadCitiesCoord() -> [ForecastTodayModel.CityCoord] {
         var citiesCoord = [ForecastTodayModel.CityCoord]()
         if let url = FileManager.documentURL?.appendingPathComponent("CitiesCoord1") {
@@ -78,44 +39,32 @@ final class ForecastViewModel: ObservableObject {
         return citiesCoord
     }
     
-    func loadCitiesCoordFuture() -> Future<[ForecastTodayModel.CityCoord], Never> {
-        Future {promise in
-            promise(.success(self.loadCitiesCoord()))
-        }
-    }
-    
-    func appendCity(_ forecastForNewCity: ForecastModel.Forecast) {
-        forecastForCities?.append(forecastForNewCity)
-        coordForCities?.append(forecastForNewCity.forecastToday.coord)
-    }
-    
-    func  removeCity(_ forecastModel: ForecastTodayModel)  {
-        forecastForCities?.remove(
-            at: forecastForCities?.firstIndex(
-                where: {$0.forecastToday == forecastModel}) ?? 0
-        )
-        coordForCities?.remove(
-            at: coordForCities?.firstIndex(
-                where: {$0 == forecastModel.coord}) ?? 0
-        )
-    }
-    
-    func saveCities() {
-        forecastForCities?
+    func appendCity(_ forecastForNewCity: ForecastModel.Forecast, _ forecastForCities: [ForecastModel.Forecast]) {
+        forecastForCities
             .publisher
-            .map {
-                ForecastTodayModel.CityCoord(
-                    lat: $0.forecastToday.coord.lat,
-                    lon: $0.forecastToday.coord.lon)
-            }
+            .append(forecastForNewCity)
+            .map{$0.forecastToday.coord}
             .collect()
-            .sink(receiveValue: {[weak self] value in
-                self?.saveCitiesCoord(value)
+            .sink(receiveValue: {[weak self] citiesCoord in
+                self?.save(citiesCoord)
             })
             .store(in: &subscriptions)
     }
-    
-    func saveCitiesCoord(_ citiesCoord: [ForecastTodayModel.CityCoord])  {
+
+    func removeCity(_ removeCityModel : ForecastTodayModel, _ forecastForCities: [ForecastModel.Forecast])  {
+        forecastForCities
+            .publisher
+            .filter {$0.forecastToday != removeCityModel}
+            .map{$0.forecastToday.coord}
+            .collect()
+            .sink(receiveValue: {[weak self] citiesCoord in
+                    self?.save(citiesCoord)
+                
+            })
+            .store(in: &subscriptions)
+    }
+   
+    func save(_ citiesCoord: [ForecastTodayModel.CityCoord])  {
         do {
             let encoder = JSONEncoder()
             let data = try  encoder.encode(citiesCoord)
@@ -127,14 +76,26 @@ final class ForecastViewModel: ObservableObject {
         }
     }
     
+    func selectedTab(_ removeCityModel : ForecastTodayModel, _ forecastForCities: [ForecastModel.Forecast]) -> ForecastTodayModel? {
+        var forecastToday: ForecastTodayModel? = nil
+        
+        forecastForCities
+            .publisher
+            .first (where: {$0.forecastToday != removeCityModel})
+            .map{$0.forecastToday}
+            .sink(receiveValue: {value in
+                   forecastToday = value
+            })
+            .store(in: &subscriptions)
+        return forecastToday
+    }
+    
     @Published var timer = Timer.publish(
         every: Constants.intervalRquestToServer,
         on: .main,
         in: .common)
         .autoconnect()
-    
-    //  private var hours = Calendar.current.component(.hour, from: Date())
-    //  private var minutes = Calendar.current.component(.minute, from: Date())
+ 
     private var timeIntreval1970 = NSDate().timeIntervalSince1970
     private var tommorow = Date().dayAfterMidnight.timeIntervalSince1970
     
@@ -147,10 +108,20 @@ final class ForecastViewModel: ObservableObject {
     }
     
     init() {
-        forecastCities()
-        
+        weatherForecastForCoordinatesOfCities(loadCitiesCoord())
     }
     
+}
+
+extension Publisher {
+    func asResultOptional() -> AnyPublisher<Result<Output, Failure>?, Never> {
+        self
+            .map(Result.success)
+            .catch {error in
+                Just(.failure(error))
+            }
+            .eraseToAnyPublisher()
+    }
 }
 
 extension Int {
@@ -198,76 +169,5 @@ extension Date {
     }
 }
 
-extension Publisher {
-    func asResult() -> AnyPublisher<Result<Output, Failure>, Never> {
-        self
-            .map(Result.success)
-            .catch {error in
-                Just(.failure(error))
-            }
-            .eraseToAnyPublisher()
-    }
-}
 
-extension Publisher where Output == Result<Array<ForecastModel.Forecast>, Error>, Failure == Never {
-    func errorFetchForecastForCities() -> AnyPublisher<API.RequestError?, Never> {
-        self
-            .map {result  in
-                switch result {
-                case .failure(let error):
-                    if case API.RequestError.addressUnreachable = error  {
-                        return API.RequestError.addressUnreachable}
-                    else if case API.RequestError.invalidRequest = error  {
-                        return API.RequestError.invalidRequest}
-                    else if case API.RequestError.decodingError = error  {
-                        return API.RequestError.decodingError}
-                    else {return API.RequestError.decodingError}
-                case .success:
-                    return API.RequestError.noError
-                }
-            }
-            .eraseToAnyPublisher()
-    }
-}
 
-extension Publisher where Output == Result<ForecastModel.Forecast, Error>, Failure == Never {
-    func errorFetchForecastForCity() -> AnyPublisher<API.RequestError?, Never> {
-        self
-            .map {result  in
-                switch result {
-                case .failure(let error):
-                    if case API.RequestError.addressUnreachable = error  {
-                        return API.RequestError.addressUnreachable}
-                    else if case API.RequestError.invalidRequest = error  {
-                        return API.RequestError.invalidRequest}
-                    else if case API.RequestError.decodingError = error  {
-                        return API.RequestError.decodingError}
-                    else {return API.RequestError.decodingError}
-                case .success:
-                    return API.RequestError.noError
-                }
-            }
-            .eraseToAnyPublisher()
-    }
-}
-
-extension Publisher where Output == Result<Array<GeocodingModel.Geocoding>, Error>, Failure == Never {
-    func errorFetchGeocodingForCities() -> AnyPublisher<API.RequestError?, Never> {
-        self
-            .map {result  in
-                switch result {
-                case .failure(let error):
-                    if case API.RequestError.addressUnreachable = error  {
-                        return API.RequestError.addressUnreachable}
-                    else if case API.RequestError.invalidRequest = error  {
-                        return API.RequestError.invalidRequest}
-                    else if case API.RequestError.decodingError = error  {
-                        return API.RequestError.decodingError}
-                    else {return API.RequestError.decodingError}
-                case .success:
-                    return API.RequestError.noError
-                }
-            }
-            .eraseToAnyPublisher()
-    }
-}

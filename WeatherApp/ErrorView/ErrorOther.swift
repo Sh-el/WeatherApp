@@ -1,14 +1,8 @@
 import SwiftUI
 
-struct ErrorOtherForMainView1: View {
-    @EnvironmentObject var model: ForecastViewModel1
-    
-    @State var timer = Timer.publish(
-        every: 30,
-        on: .main,
-        in: .common)
-        .autoconnect()
-    
+struct ErrorOther: View {
+    @EnvironmentObject var model: ForecastViewModel
+ 
     var body: some View {
         GeometryReader {geo in
             ZStack {
@@ -31,7 +25,6 @@ struct ErrorOtherForMainView1: View {
                 .foregroundColor(Constants.textColor)
             }
         }
-        
     }
 }
 

@@ -1,7 +1,7 @@
 import SwiftUI
 
-struct ErrorInvalidRequestForMainView1: View {
-    @EnvironmentObject var model: ForecastViewModel1
+struct InvalidRequest: View {
+    @EnvironmentObject var model: ForecastViewModel
     
     @State var timer = Timer.publish(
         every: 5,
@@ -49,7 +49,6 @@ struct ErrorInvalidRequestForMainView1: View {
             model.weatherForecastForCoordinatesOfCities(model.loadCitiesCoord())
         }
     }
-    
     
     private func settingOpener() {
         if let url = URL(string: UIApplication.openSettingsURLString) {

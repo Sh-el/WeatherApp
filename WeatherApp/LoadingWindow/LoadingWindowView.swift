@@ -1,7 +1,7 @@
 import SwiftUI
 
-struct LoadingWindowView1: View {
-    @EnvironmentObject var model: ForecastViewModel1
+struct LoadingWindowView: View {
+    @EnvironmentObject var model: ForecastViewModel
     
     var body: some View {
         GeometryReader {geo in
@@ -12,7 +12,7 @@ struct LoadingWindowView1: View {
                     .scaledToFill()
                     .frame(width: geo.size.width, height: geo.size.height)
                 VStack {
-                    Text("Load forecast")
+                    Text("Loading")
                         .font(.title)
                         .fontWeight(.medium)
                         .multilineTextAlignment(.center)
