@@ -36,9 +36,9 @@ struct AddCityView: View {
                     isAddCityView: $isAddCityView,
                     isAddCity: $isAddCity)
         case .failure(let error):
-            ErrorView(error: error)
+            ErrorView(error: error, color: .black)
         default:
-            LoadingWindowView()
+            LoadingWindowView(color: .blue.opacity(0.7))
         }
     }
 }

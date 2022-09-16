@@ -2,15 +2,16 @@ import SwiftUI
 
 struct ErrorView: View {
     var error: Error
+    var color: Color
     
     var body: some View {
         switch error {
         case API.RequestError.invalidRequest:
-            InvalidRequest()
+            InvalidRequest(color: color)
         case API.RequestError.decodingError:
             DecodingError()
         default:
-            ErrorOther()
+            ErrorOther(color: color)
         }
     }
 }

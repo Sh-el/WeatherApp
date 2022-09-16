@@ -12,9 +12,9 @@ struct MainView: View {
                 Forecast(forecastForCities: forecast)
             }
         case .failure(let error):
-            ErrorView(error: error)
+            ErrorView(error: error, color: .black)
         default:
-            LoadingWindowView()
+            LoadingWindowView(color: .blue.opacity(0.7))
         }
     }
     

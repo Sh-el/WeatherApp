@@ -2,15 +2,10 @@ import SwiftUI
 
 struct ErrorOther: View {
     @EnvironmentObject var model: ForecastViewModel
+    
+    var color: Color
  
     var body: some View {
-        GeometryReader {geo in
-            ZStack {
-                Image("Clear")
-                    .resizable()
-                    .ignoresSafeArea()
-                    .scaledToFill()
-                    .frame(width: geo.size.width, height: geo.size.height)
                 VStack {
                     Text("Weather information not available.")
                         .font(.title)
@@ -22,9 +17,9 @@ struct ErrorOther: View {
                         .foregroundColor(Color(hue: 0.593, saturation: 0.084, brightness: 0.892))
                         .padding(.vertical, 3.0)
                 }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .foregroundColor(Constants.textColor)
-            }
-        }
+                .background(color)
     }
 }
 
