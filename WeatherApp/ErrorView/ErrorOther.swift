@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct ErrorOther: View {
-    @EnvironmentObject var model: ForecastViewModel
     
     var color: Color
  

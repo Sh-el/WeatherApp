@@ -9,21 +9,21 @@ struct API {
         case unknownError
         case noError
         
-        var errorDescription: String {
-            switch self {
-            case .addressUnreachable:
-                return "Bad URL"
-            case .invalidRequest:
-                return "Bad connect"
-            case .decodingError:
-                return "Bad Data"
-            case .unknownError:
-                return "Unknown Error. Restart App!"
-            case .noError:
-                return "No Error"
-                
-            }
-        }
+//        var errorDescription: String {
+//            switch self {
+//            case .addressUnreachable:
+//                return "Bad URL"
+//            case .invalidRequest:
+//                return "Bad connect"
+//            case .decodingError:
+//                return "Bad Data"
+//            case .unknownError:
+//                return "Unknown Error. Restart App!"
+//            case .noError:
+//                return "No Error"
+//                
+//            }
+//        }
     }
     
     enum EndPoint {
