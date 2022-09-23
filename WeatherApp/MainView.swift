@@ -16,6 +16,31 @@ struct MainView: View {
         default:
             LoadingWindowView(color: .blue.opacity(0.7))
         }
+        
+//        FetchResult(model.forecastForCities, color: .blue.opacity(0.7)) {forecast  in
+//
+//                AddCityIfCitiesIsEmptyView(forecastForCities: forecast as! [ForecastModel.Forecast])
+//
+//        } failure: { error in
+//            ErrorView(error: error, color: .black)
+//        }
+
     }
     
+    
+}
+
+extension View {
+    
+    @ViewBuilder
+    func FetchResult<T>(_ result: Result<T, Error>?, color: Color, completion: (Any) -> some View, failure: (Error) -> some View) -> some View {
+        switch result {
+        case .success(let success):
+            completion(success)
+        case .failure(let error):
+            failure(error)
+        case .none:
+            LoadingWindowView(color: color)
+        }
+    }
 }
