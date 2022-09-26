@@ -111,7 +111,7 @@ extension ForecastModel {
                 API.jsonDecodeDataFromURLSession($0.2)
             )
         }
-        .map {
+        .map{
             Forecast(
                 forecastToday: $0.0,
                 forecastForFiveDaysThreeHours: $0.1,
