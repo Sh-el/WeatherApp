@@ -109,8 +109,13 @@ final class ForecastViewModel: ObservableObject {
     
     init() {
         weatherForecastForCoordinatesOfCities(loadCitiesCoord())
+        
+        print("init base")
     }
     
+    deinit {
+        print("deinit base")
+    }
 }
 
 extension Publisher {

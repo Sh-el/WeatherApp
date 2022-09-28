@@ -16,21 +16,7 @@ struct MainView: View {
         default:
             LoadingWindowView(color: .blue.opacity(0.7))
         }
-        
-//        FetchResult(model.forecastForCities, color: .blue.opacity(0.7)) {forecast  in
-//            Group {
-//                if forecast.isEmpty {
-//                    AddCityIfCitiesIsEmptyView(forecastForCities: forecast as! [ForecastModel.Forecast])
-//                } else {
-//                    Forecast(forecastForCities: forecast as! [ForecastModel.Forecast])
-//                }
-//            }
-//        } failure: { error in
-//            ErrorView(error: error, color: .black)
-//        }
-        
     }
-    
     
 }
 
