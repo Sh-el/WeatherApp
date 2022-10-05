@@ -2,7 +2,7 @@ import SwiftUI
 
 struct ForecastForTodayDetailsView: View {
     var forecastForCity: ForecastModel.Forecast
-    var columns: [GridItem] {
+   private var columns: [GridItem] {
         [GridItem(.adaptive(minimum: 150, maximum: 250))]
     }
     

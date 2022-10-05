@@ -22,7 +22,6 @@ final class GeocodingViewModel: ObservableObject {
             .map{$0.replacingOccurrences(of: " ", with: "%20")}
             .flatMap{GeocodingViewModel.resultAndError($0).asResultOptional()}
             .map{$0}
-            .print()
             .receive(on: DispatchQueue.main)
             .assign(to: &$geocodingForNewCity)
         

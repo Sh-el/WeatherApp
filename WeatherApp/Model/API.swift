@@ -36,7 +36,7 @@ struct API {
     }
     
     
-    static  func fetchURLForTodayWeatherForecast(_ coord: ForecastTodayModel.CityCoord) -> AnyPublisher<URL, Error> {
+    static func fetchURLForTodayWeatherForecast(_ coord: ForecastTodayModel.CityCoord) -> AnyPublisher<URL, Error> {
         Just(coord)
             .tryMap {
                 guard let url = URL(string: EndPoint.forecastTodayURL + "lat=\($0.lat)&lon=\($0.lon)" + "&limit=5" + "&appid=" + EndPoint.apiKey + "&units=metric")
@@ -48,7 +48,7 @@ struct API {
             .eraseToAnyPublisher()
     }
     
-    static  func fetchURLForWeatherForecastForThreeHourIntervalsForFiveDays(_ coord: ForecastTodayModel.CityCoord) -> AnyPublisher<URL, Error> {
+    static func fetchURLForWeatherForecastForThreeHourIntervalsForFiveDays(_ coord: ForecastTodayModel.CityCoord) -> AnyPublisher<URL, Error> {
         Just(coord)
             .tryMap {
                 guard let url = URL(string: EndPoint.forecastForFiveDaysThreeHoursURL + "lat=\($0.lat)&lon=\($0.lon)" + "&limit=5" + "&appid=" + EndPoint.apiKey + "&units=metric")
