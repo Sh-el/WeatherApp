@@ -17,6 +17,7 @@ final class GeocodingViewModel: ObservableObject {
 
     init() {
         $newCity
+//            .filter{$0 != ""}
             .debounce(for: 1.0, scheduler: DispatchQueue.main)
             .removeDuplicates()
             .map{$0.replacingOccurrences(of: " ", with: "%20")}

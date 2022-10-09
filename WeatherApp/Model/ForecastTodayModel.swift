@@ -25,7 +25,6 @@ struct ForecastTodayModel: Codable, Hashable {
     
     struct CityCoord: Encodable, Decodable, Hashable {
         var lat, lon: Double
-
     }
     
     struct Main: Codable {

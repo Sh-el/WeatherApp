@@ -32,6 +32,8 @@ struct API {
         static let airPollutionURL = "http://api.openweathermap.org/data/2.5/air_pollution?"
         static let geocoding = "http://api.openweathermap.org/geo/1.0/direct?"
         
+        static let geocoding1 = "http://api.openweathermap.org/geo/1.0/direct?&units=metric&limit=5&appid=06d1fe9aeaf87501637b6638e8a5dbbf&q="
+        
         static let apiKey = "06d1fe9aeaf87501637b6638e8a5dbbf"
     }
     
@@ -75,7 +77,7 @@ struct API {
     static func fetchURLForGeocoding(_ city: String) -> AnyPublisher<URL, Error> {
         Just(city)
             .tryMap {
-                guard let url = URL(string: EndPoint.geocoding + "q=" + $0 + "&limit=5" + "&appid=" + EndPoint.apiKey + "&units=metric")
+                guard let url = URL(string: EndPoint.geocoding1  + $0)
                 else {
                     throw  RequestError.addressUnreachable
                 }
