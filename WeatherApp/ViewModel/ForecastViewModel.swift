@@ -33,9 +33,10 @@ final class ForecastViewModel: ObservableObject {
                 let decoder = JSONDecoder()
                 citiesCoord = try decoder.decode([ForecastTodayModel.CityCoord].self, from: data)
             } catch {
+                print("error")
                 citiesCoord = [ForecastTodayModel.CityCoord]()
             }
-        }
+        } 
         return citiesCoord
     }
     
