@@ -25,6 +25,7 @@
 		DF3371B628A184AE00585676 /* CloudinessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3371B528A184AE00585676 /* CloudinessView.swift */; };
 		DF3371BC28A2C9AB00585676 /* AirPollutionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3371BB28A2C9AB00585676 /* AirPollutionModel.swift */; };
 		DF3371BF28A2CC0F00585676 /* BorderViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3371BE28A2CC0F00585676 /* BorderViewModifier.swift */; };
+		DF87100F28F6B32400AC5080 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF87100E28F6B32400AC5080 /* MapView.swift */; };
 		DF93459F28AD1BED00FC1A8D /* ButtonRemoveCity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF93459E28AD1BED00FC1A8D /* ButtonRemoveCity.swift */; };
 		DF9345A128AE16EF00FC1A8D /* ButtonAddCity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9345A028AE16EF00FC1A8D /* ButtonAddCity.swift */; };
 		DF948A7D28C9CDC300FD6E9B /* LocationAccessDenied.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF948A7C28C9CDC300FD6E9B /* LocationAccessDenied.swift */; };
@@ -40,7 +41,7 @@
 		DFB47A5228BFB1B7002B440E /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB47A5128BFB1B7002B440E /* API.swift */; };
 		DFB91FD228CC56940081DD56 /* ForecastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB91FD128CC56940081DD56 /* ForecastViewModel.swift */; };
 		DFB91FD428CC5EAC0081DD56 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB91FD328CC5EAC0081DD56 /* MainView.swift */; };
-		DFB91FD628CC76230081DD56 /* Forecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB91FD528CC76230081DD56 /* Forecast.swift */; };
+		DFB91FD628CC76230081DD56 /* ForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB91FD528CC76230081DD56 /* ForecastView.swift */; };
 		DFB91FD828CCC3360081DD56 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB91FD728CCC3360081DD56 /* BackgroundView.swift */; };
 		DFB91FDA28CCC3ED0081DD56 /* AddCityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB91FD928CCC3ED0081DD56 /* AddCityView.swift */; };
 		DFB91FDE28CCD4DA0081DD56 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB91FDD28CCD4DA0081DD56 /* ListView.swift */; };
@@ -55,6 +56,8 @@
 		DFC7F25228D1E37A00CE0032 /* AddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC7F25128D1E37A00CE0032 /* AddView.swift */; };
 		DFC7F25428D1EB0B00CE0032 /* AddCityListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC7F25328D1EB0B00CE0032 /* AddCityListView.swift */; };
 		DFC7F25628D223B800CE0032 /* DecodingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC7F25528D223B800CE0032 /* DecodingError.swift */; };
+		DFC846E028F899F400F8BCC1 /* ShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC846DF28F899F400F8BCC1 /* ShareView.swift */; };
+		DFC846E228F8A15E00F8BCC1 /* ButtonViewToImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC846E128F8A15E00F8BCC1 /* ButtonViewToImage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +81,7 @@
 		DF3371B528A184AE00585676 /* CloudinessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudinessView.swift; sourceTree = "<group>"; };
 		DF3371BB28A2C9AB00585676 /* AirPollutionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirPollutionModel.swift; sourceTree = "<group>"; };
 		DF3371BE28A2CC0F00585676 /* BorderViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderViewModifier.swift; sourceTree = "<group>"; };
+		DF87100E28F6B32400AC5080 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		DF93459E28AD1BED00FC1A8D /* ButtonRemoveCity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonRemoveCity.swift; sourceTree = "<group>"; };
 		DF9345A028AE16EF00FC1A8D /* ButtonAddCity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonAddCity.swift; sourceTree = "<group>"; };
 		DF948A7C28C9CDC300FD6E9B /* LocationAccessDenied.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationAccessDenied.swift; sourceTree = "<group>"; };
@@ -93,7 +97,7 @@
 		DFB47A5128BFB1B7002B440E /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		DFB91FD128CC56940081DD56 /* ForecastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastViewModel.swift; sourceTree = "<group>"; };
 		DFB91FD328CC5EAC0081DD56 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
-		DFB91FD528CC76230081DD56 /* Forecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Forecast.swift; sourceTree = "<group>"; };
+		DFB91FD528CC76230081DD56 /* ForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastView.swift; sourceTree = "<group>"; };
 		DFB91FD728CCC3360081DD56 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		DFB91FD928CCC3ED0081DD56 /* AddCityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCityView.swift; sourceTree = "<group>"; };
 		DFB91FDD28CCD4DA0081DD56 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
@@ -108,6 +112,8 @@
 		DFC7F25128D1E37A00CE0032 /* AddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddView.swift; sourceTree = "<group>"; };
 		DFC7F25328D1EB0B00CE0032 /* AddCityListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCityListView.swift; sourceTree = "<group>"; };
 		DFC7F25528D223B800CE0032 /* DecodingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodingError.swift; sourceTree = "<group>"; };
+		DFC846DF28F899F400F8BCC1 /* ShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareView.swift; sourceTree = "<group>"; };
+		DFC846E128F8A15E00F8BCC1 /* ButtonViewToImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonViewToImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,7 +167,7 @@
 				240D66DE287AF3D000B244A4 /* Info.plist */,
 				249672A5285EEAE40072BA93 /* WeatherAppApp.swift */,
 				DFB91FD328CC5EAC0081DD56 /* MainView.swift */,
-				DFB91FD528CC76230081DD56 /* Forecast.swift */,
+				DFB91FD528CC76230081DD56 /* ForecastView.swift */,
 				DFA339E028AB79340040EB9A /* WeatherDescriptionView.swift */,
 				DF3371AB28A0F56A00585676 /* WeatherDescription */,
 				DFB47A4828BF49D0002B440E /* LoadingWindow */,
@@ -222,6 +228,7 @@
 				DF32AEF628AFE5C8006AD468 /* AirPollutionView.swift */,
 				DFA339E628AB7D5D0040EB9A /* ForecastForTodayDetailsView.swift */,
 				DF3371AE28A182A600585676 /* ForecastForTodayDetail */,
+				DF87100E28F6B32400AC5080 /* MapView.swift */,
 			);
 			path = WeatherDescription;
 			sourceTree = "<group>";
@@ -282,6 +289,8 @@
 			children = (
 				DF9345A028AE16EF00FC1A8D /* ButtonAddCity.swift */,
 				DF93459E28AD1BED00FC1A8D /* ButtonRemoveCity.swift */,
+				DFC846DF28F899F400F8BCC1 /* ShareView.swift */,
+				DFC846E128F8A15E00F8BCC1 /* ButtonViewToImage.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -415,7 +424,7 @@
 				DFB91FDA28CCC3ED0081DD56 /* AddCityView.swift in Sources */,
 				DF3371B628A184AE00585676 /* CloudinessView.swift in Sources */,
 				DF3371B428A1845400585676 /* HumidityView.swift in Sources */,
-				DFB91FD628CC76230081DD56 /* Forecast.swift in Sources */,
+				DFB91FD628CC76230081DD56 /* ForecastView.swift in Sources */,
 				DF3371B228A183E800585676 /* PressureView.swift in Sources */,
 				DFA339E328AB79DB0040EB9A /* ForecastForFiveDaysThreeHoursView.swift in Sources */,
 				DF32AEF728AFE5C8006AD468 /* AirPollutionView.swift in Sources */,
@@ -423,6 +432,7 @@
 				24FE69592879D78B00E8AEEA /* ForecastTodayView.swift in Sources */,
 				DF9345A128AE16EF00FC1A8D /* ButtonAddCity.swift in Sources */,
 				DFB47A4128BA0E0B002B440E /* AddCityIfCitiesIsEmptyButtonModifier.swift in Sources */,
+				DFC846E028F899F400F8BCC1 /* ShareView.swift in Sources */,
 				DF3371BC28A2C9AB00585676 /* AirPollutionModel.swift in Sources */,
 				DF32AEF928B21502006AD468 /* LocationManager.swift in Sources */,
 				DFB91FE028CCD6520081DD56 /* LoadingWindowView.swift in Sources */,
@@ -433,11 +443,13 @@
 				DF3371B028A1830600585676 /* VisibilityView.swift in Sources */,
 				DFB91FE228CF10740081DD56 /* InvalidRequest.swift in Sources */,
 				DFB91FE828CF299E0081DD56 /* AddCityIfCitiesIsEmptyView.swift in Sources */,
+				DFC846E228F8A15E00F8BCC1 /* ButtonViewToImage.swift in Sources */,
 				DFA339E728AB7D5E0040EB9A /* ForecastForTodayDetailsView.swift in Sources */,
 				24914C662865ABBB0077D3D0 /* ForecastTodayModel.swift in Sources */,
 				DFA339DB28AAB3580040EB9A /* ForecastModel.swift in Sources */,
 				2482B218287582B6009A0178 /* Constants.swift in Sources */,
 				DFC7F25028D10AEB00CE0032 /* GeocodingViewModel.swift in Sources */,
+				DF87100F28F6B32400AC5080 /* MapView.swift in Sources */,
 				DFB47A5228BFB1B7002B440E /* API.swift in Sources */,
 				DFC7F24E28D1073300CE0032 /* RemoveCitiesView.swift in Sources */,
 				DFC7F25428D1EB0B00CE0032 /* AddCityListView.swift in Sources */,
@@ -586,7 +598,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -621,7 +633,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

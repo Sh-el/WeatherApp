@@ -5,7 +5,7 @@ struct ButtonAddCity: View {
     
     var body: some View {
         HStack {
-            Spacer()
+ //           Spacer()
             Button {
                 isAddCity = true
             } label: {
@@ -15,6 +15,7 @@ struct ButtonAddCity: View {
                     .padding(5)
                     .padding(.top, 10)
             }
+            Spacer()
         }
     }
 }

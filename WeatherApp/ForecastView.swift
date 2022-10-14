@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct Forecast: View {
+struct ForecastView: View {
     @EnvironmentObject var model: ForecastViewModel
     
     var forecastForCities: [ForecastModel.Forecast]
@@ -17,8 +17,11 @@ struct Forecast: View {
         TabView(selection: $selectedTab.animation(.easeInOut(duration: 1.0))) {
             ForEach(forecastForCities, id: \.id) {forecastForCity in
                 ZStack(alignment: .top) {
-                    ButtonRemoveCity(isRemoveCity: $isRemoveCity)
-                    ButtonAddCity(isAddCity: $isAddCity)
+                    VStack{
+                        ButtonAddCity(isAddCity: $isAddCity)
+                        ButtonRemoveCity(isRemoveCity: $isRemoveCity)
+                    }
+                    ShareView(forecastToday: forecastForCity.forecastToday)
                     WeatherDescriptionView(forecastForCity: forecastForCity)
                 }
                 .tag(Optional(forecastForCity.forecastToday))

@@ -9,7 +9,7 @@ struct MainView: View {
             if forecast.isEmpty {
                 AddCityIfCitiesIsEmptyView(forecastForCities: forecast)
             } else {
-                Forecast(forecastForCities: forecast)
+                ForecastView(forecastForCities: forecast)
             }
         case .failure(let error):
             ErrorView(error: error, color: .black)
