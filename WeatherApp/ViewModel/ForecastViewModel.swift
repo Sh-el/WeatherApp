@@ -6,7 +6,7 @@ final class ForecastViewModel: ObservableObject {
     @Published var forecastForCities: Result<Array<ForecastModel.Forecast>, Error>? = nil
     @Published var forecastForNewCity: Result<ForecastModel.Forecast, Error>? = nil
     
-    var subscriptions = Set<AnyCancellable>()
+    private var subscriptions = Set<AnyCancellable>()
 
     func weatherForecastForCoordinatesOfCities(_ coordForCities: [ForecastTodayModel.CityCoord]?) {
         coordForCities

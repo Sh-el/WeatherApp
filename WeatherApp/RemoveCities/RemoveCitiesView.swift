@@ -38,8 +38,8 @@ struct RemoveCitiesView: View {
             .padding(.bottom, 20)
             .listRowBackground(Color.black)
         }
-     //   .scrollContentBackground(.hidden)
-        .background(Color.black)
+        .scrollContentBackground(.hidden)
+        .background(.black)
     }
 }
 

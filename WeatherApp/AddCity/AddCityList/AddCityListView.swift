@@ -32,6 +32,7 @@ struct AddCityListView: View {
                     Image(systemName: "magnifyingglass")
                         .foregroundColor(.gray)
                     TextField("", text: $newCityGeocodingList.newCity)
+                        .autocorrectionDisabled()
                         .accentColor(.white)
                 }
                 .padding()
