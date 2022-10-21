@@ -2,12 +2,12 @@ import SwiftUI
 
 struct AddView: View {
     @EnvironmentObject var model: ForecastViewModel
+    @Environment(\.dismiss) private var dismiss
     
     var forecastForCities: [ForecastModel.Forecast]
     var forecast: ForecastModel.Forecast
     @Binding var selectedTab: ForecastTodayModel?
-    @Binding var isAddCityView: Bool
-    @Binding var isAddCity: Bool
+//    @Binding var isAddCity: Bool
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -20,15 +20,16 @@ struct AddView: View {
                     model.appendCity(forecast, forecastForCities)
                     model.weatherForecastForCoordinatesOfCities(model.loadCitiesCoord())
                     selectedTab = forecast.forecastToday
-                    isAddCityView = false
-                    isAddCity = false
+                    dismiss()
+                    dismiss()
+ //                   isAddCity = false
                 } label: {
                     Text("Add")
                         .padding(.top, 10)
                 }
                 Spacer()
                 Button {
-                    isAddCityView = false
+                    dismiss()
                 } label: {
                     Text("Cancel")
                         .padding(.top, 10)

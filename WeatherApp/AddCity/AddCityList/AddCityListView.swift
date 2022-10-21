@@ -6,20 +6,15 @@ struct AddCityListView: View {
     
     var forecastForCities: [ForecastModel.Forecast]
     @Binding var selectedTab: ForecastTodayModel?
-    @State private var isAddCityView = false
-    @Binding var isAddCity: Bool
     
-    init(isAddCity: Binding<Bool>,
-         forecastForCities: [ForecastModel.Forecast],
+    init(forecastForCities: [ForecastModel.Forecast],
          selectedTab: Binding<ForecastTodayModel?>) {
-        self._isAddCity = isAddCity
         self.forecastForCities = forecastForCities
         self._selectedTab = selectedTab
     }
     
     //init for AddCityIfCitiesIsEmptyView
-    init(isAddCity: Binding<Bool>, forecastForCities: [ForecastModel.Forecast]) {
-        self._isAddCity = isAddCity
+    init(forecastForCities: [ForecastModel.Forecast]) {
         self.forecastForCities = forecastForCities
         self._selectedTab = .constant(nil)
     }
@@ -46,9 +41,7 @@ struct AddCityListView: View {
                 case .success(let geocodingForNewCity):
                     ListView(forecastForCities: forecastForCities,
                              geocodingForNewCity: geocodingForNewCity,
-                             selectedTab: $selectedTab,
-                             isAddCityView: $isAddCityView,
-                             isAddCity: $isAddCity)
+                             selectedTab: $selectedTab)
                 case .failure(let error):
                     ErrorView(error: error, color: .black)
                 default:

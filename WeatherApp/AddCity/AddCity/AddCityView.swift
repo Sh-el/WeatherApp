@@ -5,24 +5,14 @@ struct AddCityView: View {
     
     var forecastForCities: [ForecastModel.Forecast]
     @Binding var selectedTab: ForecastTodayModel?
-    @Binding var isAddCityView: Bool
-    @Binding var isAddCity: Bool
     
-    init(isAddCityView: Binding<Bool>,
-         isAddCity: Binding<Bool>,
-         forecastForCities: [ForecastModel.Forecast]) {
-        self._isAddCityView = isAddCityView
-        self._isAddCity = isAddCity
+    init(forecastForCities: [ForecastModel.Forecast]) {
         self.forecastForCities = forecastForCities
         self._selectedTab = .constant(nil)
     }
     
-    init(isAddCityView: Binding<Bool>,
-         isAddCity: Binding<Bool>,
-         selectedTab: Binding<ForecastTodayModel?>,
+    init(selectedTab: Binding<ForecastTodayModel?>,
          forecastForCities: [ForecastModel.Forecast]) {
-        self._isAddCityView = isAddCityView
-        self._isAddCity = isAddCity
         self.forecastForCities = forecastForCities
         self._selectedTab = selectedTab
     }
@@ -32,9 +22,7 @@ struct AddCityView: View {
         case .success(let forecast):
             AddView(forecastForCities: forecastForCities,
                     forecast: forecast,
-                    selectedTab: $selectedTab,
-                    isAddCityView: $isAddCityView,
-                    isAddCity: $isAddCity)
+                    selectedTab: $selectedTab)
         case .failure(let error):
             ErrorView(error: error, color: .black)
         default:

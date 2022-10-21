@@ -7,7 +7,6 @@ struct AddCityIfCitiesIsEmptyView: View {
     @ObservedObject private var locationManager = LocationManager()
     
     var forecastForCities: [ForecastModel.Forecast]
-    @State private var isAddCityView = false
     @State private var isAddCity = false
     private let manager = CLLocationManager()
     
@@ -21,14 +20,13 @@ struct AddCityIfCitiesIsEmptyView: View {
                 MapViewForYourCoordinate()
                 LocationAccessAllowed(forecastForCities: forecastForCities,
                                       isAddCity: $isAddCity,
-                                      isAddCityView: $isAddCityView,
                                       lat: coordinate.latitude,
                                       lon: coordinate.longitude)
             }
         }
         .ignoresSafeArea()
         .sheet(isPresented: $isAddCity) {
-            AddCityListView(isAddCity: $isAddCity, forecastForCities: forecastForCities)
+            AddCityListView(forecastForCities: forecastForCities)
         }
     }
     

@@ -14,13 +14,13 @@ final class GeocodingViewModel: ObservableObject {
             .flatMap(API.jsonDecodeDataFromURLSession)
             .eraseToAnyPublisher()
     }
-
+    
     init() {
         $newCity
-//            .filter{$0 != ""}
+        //            .filter{$0 != ""}
             .debounce(for: 1.0, scheduler: DispatchQueue.main)
             .removeDuplicates()
-            .map{$0.replacingOccurrences(of: " ", with: "%20")}
+            .map{$0.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!}
             .flatMap{GeocodingViewModel.resultAndError($0).asResultOptional()}
             .map{$0}
             .receive(on: DispatchQueue.main)

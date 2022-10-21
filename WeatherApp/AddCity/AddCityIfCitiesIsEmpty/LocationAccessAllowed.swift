@@ -6,7 +6,7 @@ struct LocationAccessAllowed: View {
     
     var forecastForCities: [ForecastModel.Forecast]
     @Binding var isAddCity: Bool
-    @Binding var isAddCityView: Bool
+    @State private var isAddCityView = false
     var lat, lon: Double
     
     private let manager = CLLocationManager()
@@ -21,24 +21,17 @@ struct LocationAccessAllowed: View {
                 .padding(.top, 40)
             HStack {
                 Button {
-                    switch manager.authorizationStatus {
-                    case .denied:
-                        isAddCity = true
-                    default:
                         let coord = ForecastTodayModel.CityCoord(lat: lat, lon: lon)
                         model.weatherForecastForCoordinatesOfNewCity(coord) // serial ?
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
                                 isAddCityView = true
                         }
-                    }
                 } label: {
                     Text("Yes")
                         .addCityIfCitiesIsEmptyButtonModifier()
                 }
                 .sheet(isPresented: $isAddCityView) {
-                    AddCityView(isAddCityView: $isAddCityView,
-                                isAddCity: $isAddCity,
-                                forecastForCities: forecastForCities)
+                    AddCityView(forecastForCities: forecastForCities)
                 }
                 Button {
                     isAddCity = true

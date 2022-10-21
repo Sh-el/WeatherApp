@@ -178,6 +178,7 @@
 				DF3371AD28A0F65D00585676 /* ErrorView */,
 				DF3371BD28A2CBE000585676 /* Modifiers */,
 				2482B2162875826A009A0178 /* Constants */,
+				DFB81F04290181FE004BF1FA /* API */,
 				24914C6A2865DA910077D3D0 /* ViewModel */,
 				249672B3285EEB180072BA93 /* Model */,
 				249672A9285EEAE50072BA93 /* Assets.xcassets */,
@@ -198,7 +199,6 @@
 			isa = PBXGroup;
 			children = (
 				DFA339DA28AAB3580040EB9A /* ForecastModel.swift */,
-				DFB47A5128BFB1B7002B440E /* API.swift */,
 				24914C652865ABBB0077D3D0 /* ForecastTodayModel.swift */,
 				2482B21D2875A3AA009A0178 /* ForecastForFiveDaysThreeHoursModel.swift */,
 				DFA339DC28AAB38B0040EB9A /* ForecastForFiveDaysModel.swift */,
@@ -302,6 +302,14 @@
 				DFB47A4628BF46CA002B440E /* LoadingDotView.swift */,
 			);
 			path = LoadingWindow;
+			sourceTree = "<group>";
+		};
+		DFB81F04290181FE004BF1FA /* API */ = {
+			isa = PBXGroup;
+			children = (
+				DFB47A5128BFB1B7002B440E /* API.swift */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 		DFB91FCD28CB554F0081DD56 /* AddCityList */ = {

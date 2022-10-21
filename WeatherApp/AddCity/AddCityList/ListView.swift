@@ -7,8 +7,7 @@ struct ListView: View {
     var forecastForCities: [ForecastModel.Forecast]
     var geocodingForNewCity: [GeocodingModel.Geocoding]
     @Binding var selectedTab: ForecastTodayModel?
-    @Binding var isAddCityView: Bool
-    @Binding var isAddCity: Bool
+    @State private var isAddCityView = false
     
     var body: some View {
         if !geocodingForNewCity.isEmpty {
@@ -35,9 +34,7 @@ struct ListView: View {
                     .lineLimit(1)
                 }
                 .sheet(isPresented: $isAddCityView) {
-                    AddCityView(isAddCityView: $isAddCityView,
-                                isAddCity: $isAddCity,
-                                selectedTab: $selectedTab,
+                    AddCityView(selectedTab: $selectedTab,
                                 forecastForCities: forecastForCities)
                 }
                 .listRowBackground(Color.black)
