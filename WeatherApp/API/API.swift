@@ -34,7 +34,7 @@ struct API {
         
         static let geocoding1 = "http://api.openweathermap.org/geo/1.0/direct?&units=metric&limit=5&appid=06d1fe9aeaf87501637b6638e8a5dbbf&q="
         
-        static let apiKey = "Your apiKey"
+        static let apiKey = "06d1fe9aeaf87501637b6638e8a5dbbf"
     }
     
     

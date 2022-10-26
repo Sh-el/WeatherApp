@@ -7,7 +7,6 @@ struct AddView: View {
     var forecastForCities: [ForecastModel.Forecast]
     var forecast: ForecastModel.Forecast
     @Binding var selectedTab: ForecastTodayModel?
-//    @Binding var isAddCity: Bool
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -21,8 +20,6 @@ struct AddView: View {
                     model.weatherForecastForCoordinatesOfCities(model.loadCitiesCoord())
                     selectedTab = forecast.forecastToday
                     dismiss()
-                    dismiss()
- //                   isAddCity = false
                 } label: {
                     Text("Add")
                         .padding(.top, 10)

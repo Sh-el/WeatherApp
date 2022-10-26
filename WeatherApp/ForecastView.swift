@@ -17,7 +17,7 @@ struct ForecastView: View {
         TabView(selection: $selectedTab.animation(.easeInOut(duration: 1.0))) {
             ForEach(forecastForCities, id: \.id) {forecastForCity in
                 ZStack(alignment: .top) {
-                    VStack{
+                    VStack {
                         ButtonAddCity(isAddCity: $isAddCity)
                         ButtonRemoveCity(isRemoveCity: $isRemoveCity)
                     }
