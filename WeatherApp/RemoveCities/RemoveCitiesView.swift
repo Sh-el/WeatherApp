@@ -10,8 +10,10 @@ struct RemoveCitiesView: View {
         List(forecastForCities, id: \.id) {forecastForCity in
             HStack {
                 Button {
-                    DispatchQueue.global(qos: .userInteractive).async {
+                    DispatchQueue.global(qos: .userInteractive).sync {
                         model.removeCity(forecastForCity.forecastToday, forecastForCities)
+                    }
+                    DispatchQueue.global(qos: .userInteractive).sync {
                         model.weatherForecastForCoordinatesOfCities(model.loadCitiesCoord())
                     }
                     if let selectedTab = model.selectedTab(forecastForCity.forecastToday, forecastForCities) {
