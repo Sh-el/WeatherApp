@@ -51,7 +51,6 @@ struct ForecastTodayModel: Codable, Hashable {
         enum CodingKeys: String, CodingKey {
             case id, main
             case weatherDescription = "description"
-//          case icon
         }
     }
     

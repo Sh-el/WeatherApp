@@ -23,10 +23,10 @@ private extension ForecastModel {
         let tommorow = Date().dayAfterMidnight.timeIntervalSince1970
         return forecast.list
             .publisher
-            .filter {$0.dt > Int(tommorow)}
-            .map {Int($0.dt)}
+            .filter{$0.dt > Int(tommorow)}
+            .map{Int($0.dt)}
             .collect(8)
-            .map {$0.min() ?? 0}
+            .map{$0.min() ?? 0}
             .eraseToAnyPublisher()
     }
     
@@ -34,10 +34,10 @@ private extension ForecastModel {
         let tommorow = Date().dayAfterMidnight.timeIntervalSince1970
         return forecast.list
             .publisher
-            .filter {$0.dt > Int(tommorow)}
-            .map {Int($0.main.temp)}
+            .filter{$0.dt > Int(tommorow)}
+            .map{Int($0.main.temp)}
             .collect(8)
-            .map {$0.min() ?? 0}
+            .map{$0.min() ?? 0}
             .eraseToAnyPublisher()
     }
     
@@ -45,10 +45,10 @@ private extension ForecastModel {
         let tommorow = Date().dayAfterMidnight.timeIntervalSince1970
         return forecast.list
             .publisher
-            .filter {$0.dt > Int(tommorow)}
-            .map {Int($0.main.temp)}
+            .filter{$0.dt > Int(tommorow)}
+            .map{Int($0.main.temp)}
             .collect(8)
-            .map {$0.max() ?? 0}
+            .map{$0.max() ?? 0}
             .eraseToAnyPublisher()
     }
     
@@ -56,10 +56,10 @@ private extension ForecastModel {
         let tommorow = Date().dayAfterMidnight.timeIntervalSince1970
         return forecast.list
             .publisher
-            .filter {$0.dt > Int(tommorow)}
-            .map {$0.pop}
+            .filter{$0.dt > Int(tommorow)}
+            .map{$0.pop}
             .collect(8)
-            .map {$0.max() ?? 0.0}
+            .map{$0.max() ?? 0.0}
             .eraseToAnyPublisher()
     }
     
@@ -127,7 +127,6 @@ extension ForecastModel {
 extension ForecastModel {
     static func fetchWeatherForecastForCoordinatesOfCities(_ coords: [ForecastTodayModel.CityCoord]) -> AnyPublisher<[Forecast], Error> {
         var indexes = [ForecastTodayModel.CityCoord: Int]()
-        // bad
         for (index, entry) in coords.enumerated() {
             indexes[entry.self] = index
         }
@@ -136,7 +135,7 @@ extension ForecastModel {
             .publisher
             .flatMap(fetchWeatherForecastForCoordinatesOfCity)
             .collect()
-            .sort {a, b in
+            .sort{a, b in
                 indexes[a.forecastToday.coord]! < indexes[b.forecastToday.coord]!
             }
             .eraseToAnyPublisher()

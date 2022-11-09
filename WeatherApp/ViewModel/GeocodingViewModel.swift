@@ -17,7 +17,7 @@ final class GeocodingViewModel: ObservableObject {
     
     init() {
         $newCity
-        //            .filter{$0 != ""}
+//            .filter{!$0.isEmpty}
             .debounce(for: 1.0, scheduler: DispatchQueue.main)
             .removeDuplicates()
             .map{$0.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!}
@@ -25,14 +25,7 @@ final class GeocodingViewModel: ObservableObject {
             .map{$0}
             .receive(on: DispatchQueue.main)
             .assign(to: &$geocodingForNewCity)
-        
-        print("init geo")
     }
-    
-    deinit {
-        print("deinit geo")
-    }
-    
 }
 
 

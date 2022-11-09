@@ -8,32 +8,13 @@ struct API {
         case decodingError
         case unknownError
         case noError
-        
-//        var errorDescription: String {
-//            switch self {
-//            case .addressUnreachable:
-//                return "Bad URL"
-//            case .invalidRequest:
-//                return "Bad connect"
-//            case .decodingError:
-//                return "Bad Data"
-//            case .unknownError:
-//                return "Unknown Error. Restart App!"
-//            case .noError:
-//                return "No Error"
-//                
-//            }
-//        }
     }
     
     enum EndPoint {
         static let forecastTodayURL = "https://api.openweathermap.org/data/2.5/weather?"
         static let forecastForFiveDaysThreeHoursURL = "https://api.openweathermap.org/data/2.5/forecast?"
         static let airPollutionURL = "http://api.openweathermap.org/data/2.5/air_pollution?"
-        static let geocoding = "http://api.openweathermap.org/geo/1.0/direct?"
-        
-        static let geocoding1 = "http://api.openweathermap.org/geo/1.0/direct?&units=metric&limit=5&appid=06d1fe9aeaf87501637b6638e8a5dbbf&q="
-        
+        static let geocoding = "http://api.openweathermap.org/geo/1.0/direct?&units=metric&limit=5&appid=06d1fe9aeaf87501637b6638e8a5dbbf&q="
         static let apiKey = "06d1fe9aeaf87501637b6638e8a5dbbf"
     }
     
@@ -77,7 +58,7 @@ struct API {
     static func fetchURLForGeocoding(_ city: String) -> AnyPublisher<URL, Error> {
         Just(city)
             .tryMap {
-                guard let url = URL(string: EndPoint.geocoding1  + $0)
+                guard let url = URL(string: EndPoint.geocoding + $0)
                 else {
                     throw  RequestError.addressUnreachable
                 }
@@ -113,9 +94,6 @@ struct API {
             .map{$0}
             .eraseToAnyPublisher()
     }
-    
-    
-
 }
 
 

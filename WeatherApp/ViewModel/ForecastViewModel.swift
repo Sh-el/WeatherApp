@@ -33,7 +33,6 @@ final class ForecastViewModel: ObservableObject {
                 let decoder = JSONDecoder()
                 citiesCoord = try decoder.decode([ForecastTodayModel.CityCoord].self, from: data)
             } catch {
-                print("error")
                 citiesCoord = [ForecastTodayModel.CityCoord]()
             }
         } 
@@ -59,9 +58,7 @@ final class ForecastViewModel: ObservableObject {
             .map{$0.forecastToday.coord}
             .collect()
             .sink(receiveValue: {[weak self] citiesCoord in
-                    self?.save(citiesCoord)
-                
-            })
+                    self?.save(citiesCoord)})
             .store(in: &subscriptions)
     }
    
@@ -110,12 +107,6 @@ final class ForecastViewModel: ObservableObject {
     
     init() {
         weatherForecastForCoordinatesOfCities(loadCitiesCoord())
-        
-        print("init base")
-    }
-    
-    deinit {
-        print("deinit base")
     }
 }
 
