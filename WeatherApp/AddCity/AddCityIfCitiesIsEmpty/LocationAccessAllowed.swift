@@ -18,14 +18,16 @@ struct LocationAccessAllowed: View {
                 .background(.blue.opacity(0.7))
                 .cornerRadius(10)
                 .foregroundColor(.white)
-                .padding(.top, 40)
+                .padding(.top, 60)
             HStack {
                 Button {
-                        let coord = ForecastTodayModel.CityCoord(lat: lat, lon: lon)
-                        model.weatherForecastForCoordinatesOfNewCity(coord) // serial ?
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-                                isAddCityView = true
-                        }
+                    let coord = ForecastTodayModel.CityCoord(lat: lat, lon: lon)
+                    DispatchQueue.global().sync {
+                        model.weatherForecastForCoordinatesOfNewCity(coord)
+                    }
+ //                   DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                        isAddCityView = true
+ //                   }
                 } label: {
                     Text("Yes")
                         .addCityIfCitiesIsEmptyButtonModifier()
