@@ -3,8 +3,8 @@ import Combine
 
 final class ForecastViewModel: ObservableObject {
     
-    @Published var forecastForCities: Result<Array<ForecastModel.Forecast>, Error>? = nil
-    @Published var forecastForNewCity: Result<ForecastModel.Forecast, Error>? = nil
+    @Published var forecastForCities: Result<Array<ForecastModel.Forecast>, Error>?
+    @Published var forecastForNewCity: Result<ForecastModel.Forecast, Error>?
     
     private var subscriptions = Set<AnyCancellable>()
 
@@ -26,7 +26,7 @@ final class ForecastViewModel: ObservableObject {
     }
    
     func loadCitiesCoord() -> [ForecastTodayModel.CityCoord] {
-        var citiesCoord = [ForecastTodayModel.CityCoord]()
+        var citiesCoord: [ForecastTodayModel.CityCoord] = []
         if let url = FileManager.documentURL?.appendingPathComponent("CitiesCoord1") {
             do {
                 let data = try Data(contentsOf: url)
@@ -39,7 +39,8 @@ final class ForecastViewModel: ObservableObject {
         return citiesCoord
     }
     
-    func appendCity(_ forecastForNewCity: ForecastModel.Forecast, _ forecastForCities: [ForecastModel.Forecast]) {
+    func appendCity(_ forecastForNewCity: ForecastModel.Forecast,
+                    _ forecastForCities: [ForecastModel.Forecast]) {
         forecastForCities
             .publisher
             .append(forecastForNewCity)
@@ -51,7 +52,8 @@ final class ForecastViewModel: ObservableObject {
             .store(in: &subscriptions)
     }
 
-    func removeCity(_ removeCityModel : ForecastTodayModel, _ forecastForCities: [ForecastModel.Forecast])  {
+    func removeCity(_ removeCityModel : ForecastTodayModel,
+                    _ forecastForCities: [ForecastModel.Forecast])  {
         forecastForCities
             .publisher
             .filter {$0.forecastToday != removeCityModel}
@@ -74,8 +76,9 @@ final class ForecastViewModel: ObservableObject {
         }
     }
     
-    func selectedTab(_ removeCityModel : ForecastTodayModel, _ forecastForCities: [ForecastModel.Forecast]) -> ForecastTodayModel? {
-        var forecastToday: ForecastTodayModel? = nil
+    func selectedTab(_ removeCityModel : ForecastTodayModel,
+                     _ forecastForCities: [ForecastModel.Forecast]) -> ForecastTodayModel? {
+        var forecastToday: ForecastTodayModel?
         
         forecastForCities
             .publisher

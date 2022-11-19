@@ -70,12 +70,12 @@ private extension ForecastModel {
             maxDaytimeTempForFiveDays(forecast),
             maxDaytimeRainForFiveDays(forecast)
         )
-        .map {ForecastForFiveDaysModel.List(dt: $0.0,
+        .map{ForecastForFiveDaysModel.List(dt: $0.0,
                                            minTemp: $0.1,
                                            maxTemp: $0.2,
                                            maxRain: $0.3)}
         .collect()
-        .map {ForecastForFiveDaysModel(list: $0)}
+        .map{ForecastForFiveDaysModel(list: $0)}
         .eraseToAnyPublisher()
     }
     
@@ -126,7 +126,7 @@ extension ForecastModel {
 
 extension ForecastModel {
     static func fetchWeatherForecastForCoordinatesOfCities(_ coords: [ForecastTodayModel.CityCoord]) -> AnyPublisher<[Forecast], Error> {
-        var indexes = [ForecastTodayModel.CityCoord: Int]()
+        var indexes: [ForecastTodayModel.CityCoord: Int] = [:]
         for (index, entry) in coords.enumerated() {
             indexes[entry.self] = index
         }

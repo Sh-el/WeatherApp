@@ -18,15 +18,10 @@ struct ForecastTodayModel: Codable, Hashable {
     let visibility: Int
     let clouds: Clouds
     let coord: CityCoord
-    
-    struct Clouds: Codable {
-        let all: Int
-    }
-    
-    struct CityCoord: Encodable, Decodable, Hashable {
-        var lat, lon: Double
-    }
-    
+}
+
+//MARK: - Main
+extension ForecastTodayModel {
     struct Main: Codable {
         let temp, tempMin, tempMax: Double
         let pressure, humidity: Int
@@ -38,12 +33,25 @@ struct ForecastTodayModel: Codable, Hashable {
             case tempMax = "temp_max"
         }
     }
-    
+}
+
+//MARK: - Wind
+extension ForecastTodayModel {
+    struct Wind: Codable {
+        let speed: Double
+    }
+}
+
+//MARK: - Sys
+extension ForecastTodayModel {
     struct Sys: Codable {
         let country: String
         let sunrise, sunset: Int
     }
-    
+}
+
+//MARK: - Weather
+extension ForecastTodayModel {
     struct Weather: Codable {
         let main, weatherDescription /*icon*/: String
         let id: Int
@@ -53,12 +61,23 @@ struct ForecastTodayModel: Codable, Hashable {
             case weatherDescription = "description"
         }
     }
-    
-    struct Wind: Codable {
-        let speed: Double
-    }
-
 }
+
+//MARK: - Clouds
+extension ForecastTodayModel {
+    struct Clouds: Codable {
+        let all: Int
+    }
+}
+
+//MARK: - CityCoord
+extension ForecastTodayModel {
+    struct CityCoord: Encodable, Decodable, Hashable {
+        var lat, lon: Double
+    }
+}
+
+
 
 
 

@@ -5,9 +5,9 @@ final class GeocodingViewModel: ObservableObject {
     typealias GeocodingAndError = Result<[GeocodingModel.Geocoding], Error>
     
     @Published var newCity = "" //input
-    @Published var geocodingForNewCity: GeocodingAndError? = nil
+    @Published var geocodingForNewCity: GeocodingAndError?
     
-    static private func resultAndError(_ city: String) ->AnyPublisher<[GeocodingModel.Geocoding], Error> {
+    static private func resultAndError(_ city: String) -> AnyPublisher<[GeocodingModel.Geocoding], Error> {
         Just(city)
             .flatMap(API.fetchURLForGeocoding)
             .flatMap(API.fetchDataFromURLSession)
