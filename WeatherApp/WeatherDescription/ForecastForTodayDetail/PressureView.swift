@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct PressureView: View {
-    var forecastTodayForCity: ForecastTodayModel
+    let forecastTodayForCity: ForecastTodayModel
 
     var body: some View {
         ZStack {

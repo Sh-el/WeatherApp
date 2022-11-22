@@ -3,11 +3,12 @@ import CoreLocation
 
 struct LocationAccessAllowed: View {
     @EnvironmentObject var model: ForecastViewModel
+    let forecastForCities: [ForecastModel.Forecast]
     
-    var forecastForCities: [ForecastModel.Forecast]
     @Binding var isAddCity: Bool
     @State private var isAddCityView = false
-    var lat, lon: Double
+    
+    let lat, lon: Double
     
     private let manager = CLLocationManager()
     
@@ -25,9 +26,9 @@ struct LocationAccessAllowed: View {
                     DispatchQueue.global().sync {
                         model.weatherForecastForCoordinatesOfNewCity(coord)
                     }
- //                   DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                    DispatchQueue.global().sync {
                         isAddCityView = true
- //                   }
+                    }
                 } label: {
                     Text("Yes")
                         .addCityIfCitiesIsEmptyButtonModifier()

@@ -57,7 +57,6 @@
 		DFC7F25428D1EB0B00CE0032 /* AddCityListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC7F25328D1EB0B00CE0032 /* AddCityListView.swift */; };
 		DFC7F25628D223B800CE0032 /* DecodingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC7F25528D223B800CE0032 /* DecodingError.swift */; };
 		DFC846E028F899F400F8BCC1 /* ShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC846DF28F899F400F8BCC1 /* ShareView.swift */; };
-		DFC846E228F8A15E00F8BCC1 /* ButtonViewToImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC846E128F8A15E00F8BCC1 /* ButtonViewToImage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -113,7 +112,6 @@
 		DFC7F25328D1EB0B00CE0032 /* AddCityListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCityListView.swift; sourceTree = "<group>"; };
 		DFC7F25528D223B800CE0032 /* DecodingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodingError.swift; sourceTree = "<group>"; };
 		DFC846DF28F899F400F8BCC1 /* ShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareView.swift; sourceTree = "<group>"; };
-		DFC846E128F8A15E00F8BCC1 /* ButtonViewToImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonViewToImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -290,7 +288,6 @@
 				DF9345A028AE16EF00FC1A8D /* ButtonAddCity.swift */,
 				DF93459E28AD1BED00FC1A8D /* ButtonRemoveCity.swift */,
 				DFC846DF28F899F400F8BCC1 /* ShareView.swift */,
-				DFC846E128F8A15E00F8BCC1 /* ButtonViewToImage.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -451,7 +448,6 @@
 				DF3371B028A1830600585676 /* VisibilityView.swift in Sources */,
 				DFB91FE228CF10740081DD56 /* InvalidRequest.swift in Sources */,
 				DFB91FE828CF299E0081DD56 /* AddCityIfCitiesIsEmptyView.swift in Sources */,
-				DFC846E228F8A15E00F8BCC1 /* ButtonViewToImage.swift in Sources */,
 				DFA339E728AB7D5E0040EB9A /* ForecastForTodayDetailsView.swift in Sources */,
 				24914C662865ABBB0077D3D0 /* ForecastTodayModel.swift in Sources */,
 				DFA339DB28AAB3580040EB9A /* ForecastModel.swift in Sources */,

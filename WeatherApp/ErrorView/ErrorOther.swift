@@ -1,8 +1,7 @@
 import SwiftUI
 
 struct ErrorOther: View {
-    
-    var color: Color
+    let color: Color
  
     var body: some View {
                 VStack {

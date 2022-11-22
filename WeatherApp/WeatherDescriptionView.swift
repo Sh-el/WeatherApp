@@ -2,7 +2,7 @@ import SwiftUI
 import MapKit
 
 struct WeatherDescriptionView: View {
-    var forecastForCity: ForecastModel.Forecast
+    let forecastForCity: ForecastModel.Forecast
     
     var body: some View {
         GeometryReader{geo in

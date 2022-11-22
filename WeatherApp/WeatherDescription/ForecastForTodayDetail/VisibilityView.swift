@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct VisibilityView: View {
-    var forecastTodayForCity: ForecastTodayModel
+    let forecastTodayForCity: ForecastTodayModel
     
     var body: some View {
         ZStack {

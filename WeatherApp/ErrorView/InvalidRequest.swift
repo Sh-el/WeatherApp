@@ -3,7 +3,7 @@ import SwiftUI
 struct InvalidRequest: View {
     @EnvironmentObject var model: ForecastViewModel
     
-    var color: Color
+    let color: Color
     
     @State var timer = Timer.publish(
         every: 5,

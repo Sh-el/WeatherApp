@@ -3,7 +3,7 @@ import SwiftUI
 struct ForecastView: View {
     @EnvironmentObject var model: ForecastViewModel
     
-    var forecastForCities: [ForecastModel.Forecast]
+    let forecastForCities: [ForecastModel.Forecast]
     @State private var selectedTab: ForecastTodayModel?
     @State private var isAddCity = false
     @State private var isRemoveCity = false

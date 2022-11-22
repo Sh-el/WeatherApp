@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct AirPollutionView: View {
-    var forecastForCity: ForecastModel.Forecast
+    let forecastForCity: ForecastModel.Forecast
     
     var body: some View {
         if !forecastForCity.airPollutionModel.list.isEmpty,

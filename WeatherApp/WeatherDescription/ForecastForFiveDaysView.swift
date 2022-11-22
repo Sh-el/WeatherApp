@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ForecastForFiveDaysView: View {
-    var forecastForCity: ForecastModel.Forecast
+    let forecastForCity: ForecastModel.Forecast
     
     var body: some View {
         VStack(alignment: .leading) {

@@ -6,7 +6,7 @@ struct AddCityIfCitiesIsEmptyView: View {
     @EnvironmentObject var model: ForecastViewModel
     @ObservedObject private var locationManager = LocationManager()
     
-    var forecastForCities: [ForecastModel.Forecast]
+    let forecastForCities: [ForecastModel.Forecast]
     @State private var isAddCity = false
     private let manager = CLLocationManager()
     

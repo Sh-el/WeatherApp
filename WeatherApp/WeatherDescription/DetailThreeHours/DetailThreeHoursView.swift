@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct DetailThreeHoursView: View {
-    var list: ForecastForFiveDaysThreeHoursModel.List
+    let list: ForecastForFiveDaysThreeHoursModel.List
     
     var body: some View {
         VStack {
@@ -25,7 +25,6 @@ struct DetailThreeHoursView: View {
         }
         .foregroundColor(Constants.textColor)
     }
-    
 }
 
 

@@ -5,7 +5,6 @@ struct ButtonAddCity: View {
     
     var body: some View {
         HStack {
- //           Spacer()
             Button {
                 isAddCity = true
             } label: {

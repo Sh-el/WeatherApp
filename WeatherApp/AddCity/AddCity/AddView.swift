@@ -2,11 +2,11 @@ import SwiftUI
 
 struct AddView: View {
     @EnvironmentObject var model: ForecastViewModel
-    @Environment(\.dismiss) private var dismiss
-    
-    var forecastForCities: [ForecastModel.Forecast]
-    var forecast: ForecastModel.Forecast
+    let forecastForCities: [ForecastModel.Forecast]
+    let forecast: ForecastModel.Forecast
     @Binding var selectedTab: ForecastTodayModel?
+    
+    @Environment(\.dismiss) private var dismiss
     
     var body: some View {
         ZStack(alignment: .top) {

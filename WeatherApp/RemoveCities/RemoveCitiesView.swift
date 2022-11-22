@@ -2,8 +2,7 @@ import SwiftUI
 
 struct RemoveCitiesView: View {
     @EnvironmentObject var model: ForecastViewModel
-    
-    var forecastForCities: [ForecastModel.Forecast]
+    let forecastForCities: [ForecastModel.Forecast]
     @Binding var selectedTab: ForecastTodayModel?
   
     var body: some View {

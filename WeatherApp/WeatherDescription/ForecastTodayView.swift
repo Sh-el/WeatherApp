@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ForecastTodayView: View {
-    var forecastTodayForCity: ForecastTodayModel
+    let forecastTodayForCity: ForecastTodayModel
     
     var body: some View {
         VStack {
@@ -11,7 +11,6 @@ struct ForecastTodayView: View {
                 .lineLimit(2)
                 .frame(width: 200)
                 .padding(.top, 10)
-//            Text("\(forecastTodayForCity.coord.lat)")
             Text("\(String(Int(forecastTodayForCity.main.temp))) \u{2103}")
                 .font(.system(size: 60.0))
                 .fontWeight(.thin)

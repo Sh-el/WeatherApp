@@ -3,9 +3,9 @@ import SwiftUI
 
 struct ListView: View {
     @EnvironmentObject var model: ForecastViewModel
+    let forecastForCities: [ForecastModel.Forecast]
+    let geocodingForNewCity: [GeocodingModel.Geocoding]
     
-    var forecastForCities: [ForecastModel.Forecast]
-    var geocodingForNewCity: [GeocodingModel.Geocoding]
     @Binding var selectedTab: ForecastTodayModel?
     @State private var isAddCityView = false
     
@@ -16,8 +16,10 @@ struct ListView: View {
                     let coord = ForecastTodayModel.CityCoord(
                         lat: geocodingForNewCity.lat,
                         lon: geocodingForNewCity.lon)
-                    model.weatherForecastForCoordinatesOfNewCity(coord)
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                    DispatchQueue.global().sync {
+                        model.weatherForecastForCoordinatesOfNewCity(coord)
+                    }
+                    DispatchQueue.global().sync {
                         isAddCityView = true
                     }
                 } label: {

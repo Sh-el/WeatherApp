@@ -1,8 +1,8 @@
 import SwiftUI
 
 struct ErrorView: View {
-    var error: Error
-    var color: Color
+    let error: Error
+    let color: Color
     
     var body: some View {
         switch error {

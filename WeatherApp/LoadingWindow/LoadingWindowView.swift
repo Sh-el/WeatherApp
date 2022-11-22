@@ -2,7 +2,7 @@ import SwiftUI
 
 struct LoadingWindowView: View {
     @EnvironmentObject var model: ForecastViewModel
-    var color: Color
+    let color: Color
     
     var body: some View {
         VStack {
