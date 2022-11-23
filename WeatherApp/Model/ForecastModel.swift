@@ -80,7 +80,7 @@ private extension ForecastModel {
     }
     
     static func createFivedayWeatherForecast(_ data: Data) -> AnyPublisher<ForecastForFiveDaysModel, Error> {
-        API.jsonDecodeDataFromURLSession(data)
+        API.decodeDataFromURLSession(data)
             .flatMap(dataForFivedayWeatherForecast)
             .tryMap{$0}
             .eraseToAnyPublisher()
@@ -92,9 +92,9 @@ extension ForecastModel {
     
     static func fetchWeatherForecastForCoordinatesOfCity(_ coord: ForecastTodayModel.CityCoord) -> AnyPublisher<Forecast, Error> {
         Publishers.Zip3(
-            API.fetchURLForTodayWeatherForecast(coord),
-            API.fetchURLForWeatherForecastForThreeHourIntervalsForFiveDays(coord),
-            API.fetchURLForAirPollution(coord)
+            API.fetchURL(url: API.EndPoint.forecastTodayURL + "&lat=\(coord.lat)&lon=\(coord.lon)"),
+            API.fetchURL(url: API.EndPoint.forecastForFiveDaysThreeHoursURL + "&lat=\(coord.lat)&lon=\(coord.lon)"),
+            API.fetchURL(url: API.EndPoint.airPollutionURL + "&lat=\(coord.lat)&lon=\(coord.lon)")
         )
         .flatMap{
             Publishers.Zip3(
@@ -105,10 +105,10 @@ extension ForecastModel {
         }
         .flatMap{
             Publishers.Zip4(
-                API.jsonDecodeDataFromURLSession($0.0),
-                API.jsonDecodeDataFromURLSession($0.1),
+                API.decodeDataFromURLSession($0.0),
+                API.decodeDataFromURLSession($0.1),
                 createFivedayWeatherForecast($0.1),
-                API.jsonDecodeDataFromURLSession($0.2)
+                API.decodeDataFromURLSession($0.2)
             )
         }
         .map{

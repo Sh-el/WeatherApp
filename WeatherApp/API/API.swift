@@ -7,60 +7,32 @@ struct API {
         case invalidRequest
         case decodingError
         case unknownError
+        case timeOut
         case noError
     }
     
     enum EndPoint {
-        static let forecastTodayURL = "https://api.openweathermap.org/data/2.5/weather?"
-        static let forecastForFiveDaysThreeHoursURL = "https://api.openweathermap.org/data/2.5/forecast?"
-        static let airPollutionURL = "http://api.openweathermap.org/data/2.5/air_pollution?"
-        static let geocoding = "http://api.openweathermap.org/geo/1.0/direct?&units=metric&limit=5&appid=06d1fe9aeaf87501637b6638e8a5dbbf&q="
+        static let forecastTodayURL = "https://api.openweathermap.org/data/2.5/weather?&limit=5&appid="
+        + EndPoint.apiKey + "&units=metric"
+        
+        static let forecastForFiveDaysThreeHoursURL = "https://api.openweathermap.org/data/2.5/forecast?&limit=5&appid="
+        + EndPoint.apiKey + "&units=metric"
+        
+        static let airPollutionURL = "http://api.openweathermap.org/data/2.5/air_pollution?&limit=5&appid="
+        + EndPoint.apiKey + "&units=metric"
+        
+        static let geocoding = "http://api.openweathermap.org/geo/1.0/direct?&units=metric&limit=5&appid="
+        + EndPoint.apiKey + "&q="
+        
         static let apiKey = "06d1fe9aeaf87501637b6638e8a5dbbf"
     }
     
-    
-    static func fetchURLForTodayWeatherForecast(_ coord: ForecastTodayModel.CityCoord) -> AnyPublisher<URL, Error> {
-        Just(coord)
+    static func fetchURL(url: String) -> AnyPublisher<URL, Error> {
+        Just(url)
             .tryMap {
-                guard let url = URL(string: EndPoint.forecastTodayURL + "lat=\($0.lat)&lon=\($0.lon)" + "&limit=5" + "&appid=" + EndPoint.apiKey + "&units=metric")
+                guard let url = URL(string: $0)
                 else {
-                    throw  RequestError.addressUnreachable
-                }
-                return url
-            }
-            .eraseToAnyPublisher()
-    }
-    
-    static func fetchURLForWeatherForecastForThreeHourIntervalsForFiveDays(_ coord: ForecastTodayModel.CityCoord) -> AnyPublisher<URL, Error> {
-        Just(coord)
-            .tryMap {
-                guard let url = URL(string: EndPoint.forecastForFiveDaysThreeHoursURL + "lat=\($0.lat)&lon=\($0.lon)" + "&limit=5" + "&appid=" + EndPoint.apiKey + "&units=metric")
-                else {
-                    throw  RequestError.addressUnreachable
-                }
-                return url
-            }
-            .eraseToAnyPublisher()
-    }
-    
-    static func fetchURLForAirPollution(_ coord: ForecastTodayModel.CityCoord) -> AnyPublisher<URL, Error> {
-        Just(coord)
-            .tryMap {
-                guard let url = URL(string: EndPoint.airPollutionURL + "lat=\($0.lat)&lon=\($0.lon)" + "&limit=5" + "&appid=" + EndPoint.apiKey + "&units=metric")
-                else {
-                    throw  RequestError.addressUnreachable
-                }
-                return url
-            }
-            .eraseToAnyPublisher()
-    }
-    
-    static func fetchURLForGeocoding(_ city: String) -> AnyPublisher<URL, Error> {
-        Just(city)
-            .tryMap {
-                guard let url = URL(string: EndPoint.geocoding + $0)
-                else {
-                    throw  RequestError.addressUnreachable
+                    throw RequestError.addressUnreachable
                 }
                 return url
             }
@@ -71,18 +43,21 @@ struct API {
         URLSession
             .shared
             .dataTaskPublisher(for: url)
-            .mapError {error -> Error in
+            .mapError{error -> Error in
                 return RequestError.invalidRequest
             }
             .map(\.data)
+            .timeout(.seconds(5.0),
+                     scheduler: DispatchQueue.main,
+                     customError: {RequestError.timeOut})
             .eraseToAnyPublisher()
     }
     
-    static func jsonDecodeDataFromURLSession<T: Decodable>(_ data: Data) -> AnyPublisher<T, Error> {
+    static func decodeDataFromURLSession<T: Decodable>(_ data: Data) -> AnyPublisher<T, Error> {
         let decoder = JSONDecoder()
         
         let dataTaskPublisher = Just(data)
-            .tryMap {data -> T in
+            .tryMap{data -> T in
                 do {
                     return try decoder.decode(T.self, from: data)
                 }

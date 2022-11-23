@@ -11,7 +11,7 @@ final class ForecastViewModel: ObservableObject {
     func weatherForecastForCoordinatesOfCities(_ coordForCities: [ForecastTodayModel.CityCoord]?) {
         coordForCities
             .publisher
-            .flatMap (ForecastModel.fetchWeatherForecastForCoordinatesOfCities)
+            .flatMap(ForecastModel.fetchWeatherForecastForCoordinatesOfCities)
             .asResultOptional()
             .receive(on: DispatchQueue.main)
             .assign(to: &$forecastForCities)
@@ -56,7 +56,7 @@ final class ForecastViewModel: ObservableObject {
                     _ forecastForCities: [ForecastModel.Forecast])  {
         forecastForCities
             .publisher
-            .filter {$0.forecastToday != removeCityModel}
+            .filter{$0.forecastToday != removeCityModel}
             .map{$0.forecastToday.coord}
             .collect()
             .sink(receiveValue: {[weak self] citiesCoord in
@@ -82,7 +82,7 @@ final class ForecastViewModel: ObservableObject {
         
         forecastForCities
             .publisher
-            .first (where: {$0.forecastToday != removeCityModel})
+            .first(where: {$0.forecastToday != removeCityModel})
             .map{$0.forecastToday}
             .sink(receiveValue: {value in
                    forecastToday = value
@@ -117,7 +117,7 @@ extension Publisher {
     func asResultOptional() -> AnyPublisher<Result<Output, Failure>?, Never> {
         self
             .map(Result.success)
-            .catch {error in
+            .catch{error in
                 Just(.failure(error))
             }
             .eraseToAnyPublisher()
