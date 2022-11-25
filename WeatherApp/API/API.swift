@@ -24,7 +24,7 @@ struct API {
         static let geocoding = "http://api.openweathermap.org/geo/1.0/direct?&units=metric&limit=5&appid="
         + EndPoint.apiKey + "&q="
         
-        static let apiKey = "06d1fe9aeaf87501637b6638e8a5dbbf"
+        static let apiKey = "your key"
     }
     
     static func fetchURL(url: String) -> AnyPublisher<URL, Error> {
