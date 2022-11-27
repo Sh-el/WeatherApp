@@ -92,9 +92,9 @@ extension ForecastModel {
     
     static func fetchWeatherForecastForCoordinatesOfCity(_ coord: ForecastTodayModel.CityCoord) -> AnyPublisher<Forecast, Error> {
         Publishers.Zip3(
-            API.fetchURL(url: API.EndPoint.forecastTodayURL + "&lat=\(coord.lat)&lon=\(coord.lon)"),
-            API.fetchURL(url: API.EndPoint.forecastForFiveDaysThreeHoursURL + "&lat=\(coord.lat)&lon=\(coord.lon)"),
-            API.fetchURL(url: API.EndPoint.airPollutionURL + "&lat=\(coord.lat)&lon=\(coord.lon)")
+            API.fetchURL(url: API.EndPoint.forecastToday.url + "&lat=\(coord.lat)&lon=\(coord.lon)"),
+            API.fetchURL(url: API.EndPoint.forecastForFiveDaysThreeHours.url + "&lat=\(coord.lat)&lon=\(coord.lon)"),
+            API.fetchURL(url: API.EndPoint.airPollution.url + "&lat=\(coord.lat)&lon=\(coord.lon)")
         )
         .flatMap{
             Publishers.Zip3(

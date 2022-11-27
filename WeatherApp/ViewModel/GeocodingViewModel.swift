@@ -9,7 +9,7 @@ final class GeocodingViewModel: ObservableObject {
     
     static private func resultAndError(_ city: String) -> AnyPublisher<[GeocodingModel.Geocoding], Error> {
         Just(city)
-            .flatMap{API.fetchURL(url: API.EndPoint.geocoding + $0)}
+            .flatMap{API.fetchURL(url: API.EndPoint.geocoding.url + $0)}
             .flatMap(API.fetchDataFromURLSession)
             .flatMap(API.decodeDataFromURLSession)
             .eraseToAnyPublisher()

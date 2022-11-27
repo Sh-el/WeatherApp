@@ -12,19 +12,29 @@ struct API {
     }
     
     enum EndPoint {
-        static let forecastTodayURL = "https://api.openweathermap.org/data/2.5/weather?&limit=5&appid="
-        + EndPoint.apiKey + "&units=metric"
+        static private let apiKey = "06d1fe9aeaf87501637b6638e8a5dbbf"
         
-        static let forecastForFiveDaysThreeHoursURL = "https://api.openweathermap.org/data/2.5/forecast?&limit=5&appid="
-        + EndPoint.apiKey + "&units=metric"
+        case forecastToday
+        case forecastForFiveDaysThreeHours
+        case airPollution
+        case geocoding
         
-        static let airPollutionURL = "http://api.openweathermap.org/data/2.5/air_pollution?&limit=5&appid="
-        + EndPoint.apiKey + "&units=metric"
-        
-        static let geocoding = "http://api.openweathermap.org/geo/1.0/direct?&units=metric&limit=5&appid="
-        + EndPoint.apiKey + "&q="
-        
-        static let apiKey = "06d1fe9aeaf87501637b6638e8a5dbbf"
+        var url: String {
+            switch self {
+            case .forecastToday:
+                return "https://api.openweathermap.org/data/2.5/weather?&limit=5&appid="
+                + EndPoint.apiKey + "&units=metric"
+            case .forecastForFiveDaysThreeHours:
+                return "https://api.openweathermap.org/data/2.5/forecast?&limit=5&appid="
+                + EndPoint.apiKey + "&units=metric"
+            case .airPollution:
+                return "http://api.openweathermap.org/data/2.5/air_pollution?&limit=5&appid="
+                + EndPoint.apiKey + "&units=metric"
+            case .geocoding:
+                return "http://api.openweathermap.org/geo/1.0/direct?&units=metric&limit=5&appid="
+                + EndPoint.apiKey + "&q="
+            }
+        }
     }
     
     static func fetchURL(url: String) -> AnyPublisher<URL, Error> {
