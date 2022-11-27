@@ -19,6 +19,7 @@ struct API {
         case airPollution
         case geocoding
         
+        
         var url: String {
             switch self {
             case .forecastToday:
@@ -36,7 +37,7 @@ struct API {
             }
         }
     }
-    
+   
     static func fetchURL(url: String) -> AnyPublisher<URL, Error> {
         Just(url)
             .tryMap {
