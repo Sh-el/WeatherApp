@@ -2,7 +2,6 @@ import Foundation
 import Combine
 
 struct ForecastModel {
-    
     struct Forecast: Equatable {
         static func == (lhs: ForecastModel.Forecast, rhs: ForecastModel.Forecast) -> Bool {
             return lhs.id == rhs.id
@@ -13,12 +12,10 @@ struct ForecastModel {
         let forecastForFiveDaysThreeHours: ForecastForFiveDaysThreeHoursModel
         let forecastForFiveDays: ForecastForFiveDaysModel
         let airPollutionModel: AirPollutionModel
-
     }
 }
 
-private extension ForecastModel {
-    
+extension ForecastModel {
     static func nameOfDayOfWeek(_ forecast: ForecastForFiveDaysThreeHoursModel) -> AnyPublisher<Int, Never> {
         let tommorow = Date().dayAfterMidnight.timeIntervalSince1970
         return forecast.list
@@ -89,12 +86,37 @@ private extension ForecastModel {
 }
 
 extension ForecastModel {
+    enum EndPoint {
+        static private let apiKey = "06d1fe9aeaf87501637b6638e8a5dbbf"
+        
+        case forecastToday
+        case forecastForFiveDaysThreeHours
+        case airPollution
+        case geocoding
+       
+        var url: String {
+            switch self {
+            case .forecastToday:
+                return "https://api.openweathermap.org/data/2.5/weather?&limit=5&appid="
+                + EndPoint.apiKey + "&units=metric"
+            case .forecastForFiveDaysThreeHours:
+                return "https://api.openweathermap.org/data/2.5/forecast?&limit=5&appid="
+                + EndPoint.apiKey + "&units=metric"
+            case .airPollution:
+                return "http://api.openweathermap.org/data/2.5/air_pollution?&limit=5&appid="
+                + EndPoint.apiKey + "&units=metric"
+            case .geocoding:
+                return "http://api.openweathermap.org/geo/1.0/direct?&units=metric&limit=5&appid="
+                + EndPoint.apiKey + "&q="
+            }
+        }
+    }
     
     static func fetchWeatherForecastForCoordinatesOfCity(_ coord: ForecastTodayModel.CityCoord) -> AnyPublisher<Forecast, Error> {
         Publishers.Zip3(
-            API.fetchURL(url: API.EndPoint.forecastToday.url + "&lat=\(coord.lat)&lon=\(coord.lon)"),
-            API.fetchURL(url: API.EndPoint.forecastForFiveDaysThreeHours.url + "&lat=\(coord.lat)&lon=\(coord.lon)"),
-            API.fetchURL(url: API.EndPoint.airPollution.url + "&lat=\(coord.lat)&lon=\(coord.lon)")
+            API.fetchURL(url: EndPoint.forecastToday.url + "&lat=\(coord.lat)&lon=\(coord.lon)"),
+            API.fetchURL(url: EndPoint.forecastForFiveDaysThreeHours.url + "&lat=\(coord.lat)&lon=\(coord.lon)"),
+            API.fetchURL(url: EndPoint.airPollution.url + "&lat=\(coord.lat)&lon=\(coord.lon)")
         )
         .flatMap{
             Publishers.Zip3(
@@ -107,7 +129,7 @@ extension ForecastModel {
             Publishers.Zip4(
                 API.decodeDataFromURLSession($0.0),
                 API.decodeDataFromURLSession($0.1),
-                createFivedayWeatherForecast($0.1),
+                ForecastModel.createFivedayWeatherForecast($0.1),
                 API.decodeDataFromURLSession($0.2)
             )
         }
@@ -121,7 +143,6 @@ extension ForecastModel {
         }
         .eraseToAnyPublisher()
     }
-    
 }
 
 extension ForecastModel {
@@ -150,4 +171,13 @@ extension Publisher where Output: Sequence {
             sequence.sorted(by: sorter)
         }
     }
+}
+
+//MARK: - ForecastTodayModel
+extension ForecastModel {
+    
+}
+
+extension ForecastModel {
+    
 }
