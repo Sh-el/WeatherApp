@@ -15,7 +15,7 @@ struct ForecastTodayView: View {
                 .font(.system(size: 60.0))
                 .fontWeight(.thin)
                 .multilineTextAlignment(.center)
-            Text(forecastTodayForCity.weather[0].weatherDescription.capitalized)
+            Text(forecastTodayForCity.weather.first!.weatherDescription.capitalized)
                 .padding(.bottom, 5)
             HStack {
                 HStack{

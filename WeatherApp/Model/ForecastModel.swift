@@ -82,7 +82,6 @@ extension ForecastModel {
             .tryMap{$0}
             .eraseToAnyPublisher()
     }
-    
 }
 
 extension ForecastModel {
@@ -173,11 +172,4 @@ extension Publisher where Output: Sequence {
     }
 }
 
-//MARK: - ForecastTodayModel
-extension ForecastModel {
-    
-}
 
-extension ForecastModel {
-    
-}

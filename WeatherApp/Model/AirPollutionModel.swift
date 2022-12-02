@@ -10,11 +10,13 @@ extension AirPollutionModel {
         let main: Main
         let components: [String: Double]
         let dt: Int
-        
-        //MARK: - Main
-        struct Main: Codable {
-            let aqi: Int
-        }
+    }
+}
+
+//MARK: - Main
+extension AirPollutionModel {
+    struct Main: Codable {
+        let aqi: Int
     }
 }
 

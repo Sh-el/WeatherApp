@@ -10,9 +10,7 @@ struct API {
         case timeOut
         case noError
     }
-    
-    
-   
+  
     static func fetchURL(url: String) -> AnyPublisher<URL, Error> {
         Just(url)
             .tryMap {

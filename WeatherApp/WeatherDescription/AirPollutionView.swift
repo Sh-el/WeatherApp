@@ -46,7 +46,6 @@ struct AirPollutionView: View {
             }
             .bordered()
         }
-        
     }
     
     func descriptionComponents(_ components: String) -> String {

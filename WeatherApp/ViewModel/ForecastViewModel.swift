@@ -2,7 +2,6 @@ import Foundation
 import Combine
 
 final class ForecastViewModel: ObservableObject {
-    
     @Published var forecastForCities: Result<Array<ForecastModel.Forecast>, Error>?
     @Published var forecastForNewCity: Result<ForecastModel.Forecast, Error>?
     

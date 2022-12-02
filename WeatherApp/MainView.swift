@@ -17,13 +17,14 @@ struct MainView: View {
             LoadingWindowView(color: .blue.opacity(0.7))
         }
     }
-    
 }
 
 extension View {
-    
     @ViewBuilder
-    func FetchResult<T>(_ result: Result<T, Error>?, color: Color, completion: (Any) -> some View, failure: (Error) -> some View) -> some View {
+    func FetchResult<T>(_ result: Result<T, Error>?,
+                        color: Color,
+                        completion: (Any) -> some View,
+                        failure: (Error) -> some View) -> some View {
         switch result {
         case .success(let success):
             completion(success)
