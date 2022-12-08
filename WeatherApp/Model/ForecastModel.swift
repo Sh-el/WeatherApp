@@ -27,7 +27,7 @@ extension ForecastModel {
             .eraseToAnyPublisher()
     }
     
-    static func minDaytimeTempForFiveDays(_ forecast: ForecastForFiveDaysThreeHoursModel) -> AnyPublisher<Int, Never> {
+    static func minDaytimeTemp(_ forecast: ForecastForFiveDaysThreeHoursModel) -> AnyPublisher<Int, Never> {
         let tommorow = Date().dayAfterMidnight.timeIntervalSince1970
         return forecast.list
             .publisher
@@ -38,7 +38,7 @@ extension ForecastModel {
             .eraseToAnyPublisher()
     }
     
-    static func maxDaytimeTempForFiveDays(_ forecast: ForecastForFiveDaysThreeHoursModel) -> AnyPublisher<Int, Never> {
+    static func maxDaytimeTemp(_ forecast: ForecastForFiveDaysThreeHoursModel) -> AnyPublisher<Int, Never> {
         let tommorow = Date().dayAfterMidnight.timeIntervalSince1970
         return forecast.list
             .publisher
@@ -49,7 +49,7 @@ extension ForecastModel {
             .eraseToAnyPublisher()
     }
     
-    static func maxDaytimeRainForFiveDays(_ forecast: ForecastForFiveDaysThreeHoursModel) -> AnyPublisher<Double, Never> {
+    static func maxDaytimeRain(_ forecast: ForecastForFiveDaysThreeHoursModel) -> AnyPublisher<Double, Never> {
         let tommorow = Date().dayAfterMidnight.timeIntervalSince1970
         return forecast.list
             .publisher
@@ -60,12 +60,12 @@ extension ForecastModel {
             .eraseToAnyPublisher()
     }
     
-    static func dataForFivedayWeatherForecast(_ forecast: ForecastForFiveDaysThreeHoursModel) -> AnyPublisher<ForecastForFiveDaysModel, Never> {
+    static func dataForecast(_ forecast: ForecastForFiveDaysThreeHoursModel) -> AnyPublisher<ForecastForFiveDaysModel, Never> {
         Publishers.Zip4(
             nameOfDayOfWeek(forecast),
-            minDaytimeTempForFiveDays(forecast),
-            maxDaytimeTempForFiveDays(forecast),
-            maxDaytimeRainForFiveDays(forecast)
+            minDaytimeTemp(forecast),
+            maxDaytimeTemp(forecast),
+            maxDaytimeRain(forecast)
         )
         .map{ForecastForFiveDaysModel.List(dt: $0.0,
                                            minTemp: $0.1,
@@ -77,8 +77,8 @@ extension ForecastModel {
     }
     
     static func createFivedayWeatherForecast(_ data: Data) -> AnyPublisher<ForecastForFiveDaysModel, Error> {
-        API.decodeDataFromURLSession(data)
-            .flatMap(dataForFivedayWeatherForecast)
+        API.decode(data)
+            .flatMap(dataForecast)
             .tryMap{$0}
             .eraseToAnyPublisher()
     }
@@ -111,25 +111,25 @@ extension ForecastModel {
         }
     }
     
-    static func fetchWeatherForecastForCoordinatesOfCity(_ coord: ForecastTodayModel.CityCoord) -> AnyPublisher<Forecast, Error> {
+    static func fetchWeatherForecast(_ coord: ForecastTodayModel.CityCoord) -> AnyPublisher<Forecast, Error> {
         Publishers.Zip3(
-            API.fetchURL(url: EndPoint.forecastToday.url + "&lat=\(coord.lat)&lon=\(coord.lon)"),
-            API.fetchURL(url: EndPoint.forecastForFiveDaysThreeHours.url + "&lat=\(coord.lat)&lon=\(coord.lon)"),
-            API.fetchURL(url: EndPoint.airPollution.url + "&lat=\(coord.lat)&lon=\(coord.lon)")
+            API.fetch(url: EndPoint.forecastToday.url + "&lat=\(coord.lat)&lon=\(coord.lon)"),
+            API.fetch(url: EndPoint.forecastForFiveDaysThreeHours.url + "&lat=\(coord.lat)&lon=\(coord.lon)"),
+            API.fetch(url: EndPoint.airPollution.url + "&lat=\(coord.lat)&lon=\(coord.lon)")
         )
         .flatMap{
             Publishers.Zip3(
-                API.fetchDataFromURLSession($0.0),
-                API.fetchDataFromURLSession($0.1),
-                API.fetchDataFromURLSession($0.2)
+                API.fetchData($0.0),
+                API.fetchData($0.1),
+                API.fetchData($0.2)
             )
         }
         .flatMap{
             Publishers.Zip4(
-                API.decodeDataFromURLSession($0.0),
-                API.decodeDataFromURLSession($0.1),
+                API.decode($0.0),
+                API.decode($0.1),
                 ForecastModel.createFivedayWeatherForecast($0.1),
-                API.decodeDataFromURLSession($0.2)
+                API.decode($0.2)
             )
         }
         .map{
@@ -145,7 +145,7 @@ extension ForecastModel {
 }
 
 extension ForecastModel {
-    static func fetchWeatherForecastForCoordinatesOfCities(_ coords: [ForecastTodayModel.CityCoord]) -> AnyPublisher<[Forecast], Error> {
+    static func fetchWeatherForecasts(_ coords: [ForecastTodayModel.CityCoord]) -> AnyPublisher<[Forecast], Error> {
         var indexes: [ForecastTodayModel.CityCoord: Int] = [:]
         for (index, entry) in coords.enumerated() {
             indexes[entry.self] = index
@@ -153,7 +153,7 @@ extension ForecastModel {
         
         return coords
             .publisher
-            .flatMap(fetchWeatherForecastForCoordinatesOfCity)
+            .flatMap(fetchWeatherForecast)
             .collect()
             .sort{a, b in
                 indexes[a.forecastToday.coord]! < indexes[b.forecastToday.coord]!

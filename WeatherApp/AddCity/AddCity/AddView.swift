@@ -17,7 +17,7 @@ struct AddView: View {
             HStack {
                 Button {
                     model.appendCity(forecast, forecastForCities)
-                    model.weatherForecastForCoordinatesOfCities(model.loadCitiesCoord())
+                    model.weatherForecast(model.loadCitiesCoord())
                     selectedTab = forecast.forecastToday
                     dismiss()
                 } label: {

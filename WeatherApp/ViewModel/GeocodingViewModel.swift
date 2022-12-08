@@ -7,11 +7,11 @@ final class GeocodingViewModel: ObservableObject {
     @Published var newCity = "" //input
     @Published var geocodingForNewCity: GeocodingAndError?
     
-    static private func resultAndError(_ city: String) -> AnyPublisher<[GeocodingModel.Geocoding], Error> {
+    static private func geocoding(_ city: String) -> AnyPublisher<[GeocodingModel.Geocoding], Error> {
         Just(city)
-            .flatMap{API.fetchURL(url: ForecastModel.EndPoint.geocoding.url + $0)}
-            .flatMap(API.fetchDataFromURLSession)
-            .flatMap(API.decodeDataFromURLSession)
+            .flatMap{API.fetch(url: ForecastModel.EndPoint.geocoding.url + $0)}
+            .flatMap(API.fetchData)
+            .flatMap(API.decode)
             .eraseToAnyPublisher()
     }
     
@@ -21,7 +21,7 @@ final class GeocodingViewModel: ObservableObject {
             .debounce(for: 1.0, scheduler: DispatchQueue.main)
             .removeDuplicates()
             .map{$0.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!}
-            .flatMap{GeocodingViewModel.resultAndError($0).asResultOptional()}
+            .flatMap{GeocodingViewModel.geocoding($0).asResult()}
             .map{$0}
             .receive(on: DispatchQueue.main)
             .assign(to: &$geocodingForNewCity)

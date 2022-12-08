@@ -13,7 +13,7 @@ struct RemoveCitiesView: View {
                         model.removeCity(forecastForCity.forecastToday, forecastForCities)
                     }
                     DispatchQueue.global(qos: .userInteractive).sync {
-                        model.weatherForecastForCoordinatesOfCities(model.loadCitiesCoord())
+                        model.weatherForecast(model.loadCitiesCoord())
                     }
                     if let selectedTab = model.selectedTab(forecastForCity.forecastToday, forecastForCities) {
                         self.selectedTab = selectedTab

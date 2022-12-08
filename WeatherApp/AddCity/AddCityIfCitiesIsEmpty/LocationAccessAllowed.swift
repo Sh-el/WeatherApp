@@ -24,7 +24,7 @@ struct LocationAccessAllowed: View {
                 Button {
                     let coord = ForecastTodayModel.CityCoord(lat: lat, lon: lon)
                     DispatchQueue.global().sync {
-                        model.weatherForecastForCoordinatesOfNewCity(coord)
+                        model.weatherForecastForNewCity(coord)
                     }
                     DispatchQueue.global().sync {
                         isAddCityView = true

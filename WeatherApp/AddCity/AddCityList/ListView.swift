@@ -17,7 +17,7 @@ struct ListView: View {
                         lat: geocodingForNewCity.lat,
                         lon: geocodingForNewCity.lon)
                     DispatchQueue.global().sync {
-                        model.weatherForecastForCoordinatesOfNewCity(coord)
+                        model.weatherForecastForNewCity(coord)
                     }
                     DispatchQueue.global().sync {
                         isAddCityView = true

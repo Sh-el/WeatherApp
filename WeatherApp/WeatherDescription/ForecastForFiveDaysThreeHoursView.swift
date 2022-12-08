@@ -26,7 +26,6 @@ struct ForecastForFiveDaysThreeHoursView: View {
     }
 }
 
-
 extension View {
     func textBlockHeaderModifier() -> some View {
         return self

@@ -11,7 +11,7 @@ struct API {
         case noError
     }
   
-    static func fetchURL(url: String) -> AnyPublisher<URL, Error> {
+    static func fetch(url: String) -> AnyPublisher<URL, Error> {
         Just(url)
             .tryMap {
                 guard let url = URL(string: $0)
@@ -23,7 +23,7 @@ struct API {
             .eraseToAnyPublisher()
     }
     
-    static func fetchDataFromURLSession(_ url: URL) -> AnyPublisher<Data, Error> {
+    static func fetchData(_ url: URL) -> AnyPublisher<Data, Error> {
         URLSession
             .shared
             .dataTaskPublisher(for: url)
@@ -37,7 +37,7 @@ struct API {
             .eraseToAnyPublisher()
     }
     
-    static func decodeDataFromURLSession<T: Decodable>(_ data: Data) -> AnyPublisher<T, Error> {
+    static func decode<T: Decodable>(_ data: Data) -> AnyPublisher<T, Error> {
         let decoder = JSONDecoder()
         
         let dataTaskPublisher = Just(data)

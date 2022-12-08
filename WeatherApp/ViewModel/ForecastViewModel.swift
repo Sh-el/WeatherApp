@@ -7,19 +7,19 @@ final class ForecastViewModel: ObservableObject {
     
     private var subscriptions = Set<AnyCancellable>()
 
-    func weatherForecastForCoordinatesOfCities(_ coordForCities: [ForecastTodayModel.CityCoord]?) {
+    func weatherForecast(_ coordForCities: [ForecastTodayModel.CityCoord]?) {
         coordForCities
             .publisher
-            .flatMap(ForecastModel.fetchWeatherForecastForCoordinatesOfCities)
-            .asResultOptional()
+            .flatMap(ForecastModel.fetchWeatherForecasts)
+            .asResult()
             .receive(on: DispatchQueue.main)
             .assign(to: &$forecastForCities)
     }
     
-    func weatherForecastForCoordinatesOfNewCity(_ cityCoord: ForecastTodayModel.CityCoord) {
-        ForecastModel.fetchWeatherForecastForCoordinatesOfCity(cityCoord)
+    func weatherForecastForNewCity(_ cityCoord: ForecastTodayModel.CityCoord) {
+        ForecastModel.fetchWeatherForecast(cityCoord)
             .share()
-            .asResultOptional()
+            .asResult()
             .receive(on: DispatchQueue.main)
             .assign(to: &$forecastForNewCity)
     }
@@ -108,12 +108,12 @@ final class ForecastViewModel: ObservableObject {
     }
     
     init() {
-        weatherForecastForCoordinatesOfCities(loadCitiesCoord())
+        weatherForecast(loadCitiesCoord())
     }
 }
 
 extension Publisher {
-    func asResultOptional() -> AnyPublisher<Result<Output, Failure>?, Never> {
+    func asResult() -> AnyPublisher<Result<Output, Failure>?, Never> {
         self
             .map(Result.success)
             .catch{error in

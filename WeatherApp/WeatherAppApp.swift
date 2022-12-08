@@ -13,7 +13,7 @@ struct WeatherAppApp: App {
             MainView()
                 .environmentObject(model)
                 .onReceive(model.timer) {_ in
-                    model.weatherForecastForCoordinatesOfCities(model.loadCitiesCoord())
+                    model.weatherForecast(model.loadCitiesCoord())
                 }
         }
     }
