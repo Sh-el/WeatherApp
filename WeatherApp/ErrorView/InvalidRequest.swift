@@ -41,7 +41,7 @@ struct InvalidRequest: View {
         .foregroundColor(Constants.textColor)
         .background(color)
         .onReceive(timer) {_ in
-            model.weatherForecast(model.loadCitiesCoord())
+            model.weatherForecast1(model.loadCitiesCoord1())
         }
     }
     

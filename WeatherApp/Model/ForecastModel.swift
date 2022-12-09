@@ -7,7 +7,7 @@ struct ForecastModel {
             return lhs.id == rhs.id
         }
         
-        var id = UUID()
+        let id = UUID()
         let forecastToday : ForecastTodayModel
         let forecastForFiveDaysThreeHours: ForecastForFiveDaysThreeHoursModel
         let forecastForFiveDays: ForecastForFiveDaysModel

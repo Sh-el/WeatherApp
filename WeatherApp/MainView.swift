@@ -4,16 +4,15 @@ struct MainView: View {
     @EnvironmentObject var model: ForecastViewModel
     
     var body: some View {
-        switch model.forecastForCities {
-        case .success(let forecast):
-            if forecast.isEmpty {
-                AddCityIfCitiesIsEmptyView(forecastForCities: forecast)
+        FetchResult(model.forecastForCities) {forecastForCities in
+            if forecastForCities.isEmpty {
+                AddCityIfCitiesIsEmptyView(forecastForCities: forecastForCities)
             } else {
-                ForecastView(forecastForCities: forecast)
+                ForecastView(forecastForCities: forecastForCities)
             }
-        case .failure(let error):
+        } failure: {error in
             ErrorView(error: error, color: .black)
-        default:
+        } none: {
             LoadingWindowView(color: .blue.opacity(0.7))
         }
     }
@@ -22,16 +21,18 @@ struct MainView: View {
 extension View {
     @ViewBuilder
     func FetchResult<T>(_ result: Result<T, Error>?,
-                        color: Color,
-                        completion: (Any) -> some View,
-                        failure: (Error) -> some View) -> some View {
+                        @ViewBuilder completion:  (T) -> some View,
+                        @ViewBuilder failure: (Error) -> some View,
+                        @ViewBuilder none: () -> some View) -> some View {
         switch result {
         case .success(let success):
             completion(success)
         case .failure(let error):
             failure(error)
         case .none:
-            LoadingWindowView(color: color)
+            none()
         }
     }
+    
+    
 }

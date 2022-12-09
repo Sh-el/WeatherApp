@@ -7,8 +7,8 @@ final class ForecastViewModel: ObservableObject {
     
     private var subscriptions = Set<AnyCancellable>()
 
-    func weatherForecast(_ coordForCities: [ForecastTodayModel.CityCoord]?) {
-        coordForCities
+    func weatherForecast1(_ coordForCities: @autoclosure () -> [ForecastTodayModel.CityCoord]?) {
+        coordForCities()
             .publisher
             .flatMap(ForecastModel.fetchWeatherForecasts)
             .asResult()
@@ -34,7 +34,21 @@ final class ForecastViewModel: ObservableObject {
             } catch {
                 citiesCoord = [ForecastTodayModel.CityCoord]()
             }
-        } 
+        }
+        return citiesCoord
+    }
+    
+    func loadCitiesCoord1() -> [ForecastTodayModel.CityCoord]? {
+        var citiesCoord: [ForecastTodayModel.CityCoord] = []
+        if let url = FileManager.documentURL?.appendingPathComponent("CitiesCoord1") {
+            do {
+                let data = try Data(contentsOf: url)
+                let decoder = JSONDecoder()
+                citiesCoord = try decoder.decode([ForecastTodayModel.CityCoord].self, from: data)
+            } catch {
+                citiesCoord = [ForecastTodayModel.CityCoord]()
+            }
+        }
         return citiesCoord
     }
     
@@ -108,7 +122,7 @@ final class ForecastViewModel: ObservableObject {
     }
     
     init() {
-        weatherForecast(loadCitiesCoord())
+        weatherForecast1(loadCitiesCoord1())
     }
 }
 
