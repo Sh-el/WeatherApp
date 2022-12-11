@@ -25,7 +25,6 @@ struct LoadingDotView: View {
         DotView(delay: 0.2)
         DotView(delay: 0.4)
         }
-    
     }
 }
 

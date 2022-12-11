@@ -41,6 +41,7 @@ struct RemoveCitiesView: View {
         }
         .scrollContentBackground(.hidden)
         .background(.black)
+        
     }
 }
 

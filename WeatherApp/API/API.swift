@@ -2,7 +2,7 @@ import Foundation
 import Combine
 
 struct API {
-    enum RequestError: String, LocalizedError {
+    enum RequestError: Error {
         case addressUnreachable
         case invalidRequest
         case decodingError

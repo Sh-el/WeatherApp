@@ -2,7 +2,7 @@ import SwiftUI
 
 @main
 struct WeatherAppApp: App {
-    let  model = ForecastViewModel()
+    @StateObject var  model = ForecastViewModel()
     
     init() {
         UITableView.appearance().backgroundColor = .black

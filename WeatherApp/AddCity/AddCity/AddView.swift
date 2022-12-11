@@ -35,7 +35,7 @@ struct AddView: View {
             .font(.headline)
             .padding(5)
         }
-        .background(BackgroundView(forecastTodayForSelectedCity: forecast.forecastToday))
+        .background(BackgroundView(forecastTodayModel: forecast.forecastToday))
         .foregroundColor(Constants.textColor)
     }
 }

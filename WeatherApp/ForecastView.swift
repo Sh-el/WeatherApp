@@ -28,10 +28,10 @@ struct ForecastView: View {
             }
         }
         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
-        .background(BackgroundView(forecastTodayForSelectedCity: selectedTab!))
+        .background(BackgroundView(forecastTodayModel: selectedTab!))
         .sheet(isPresented: $isAddCity) {
             AddCityListView(forecastForCities: forecastForCities,
-                             selectedTab: $selectedTab)
+                            selectedTab: $selectedTab)
         }
         .sheet(isPresented: $isRemoveCity) {
             RemoveCitiesView(forecastForCities: forecastForCities,

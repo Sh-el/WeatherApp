@@ -2,11 +2,11 @@ import SwiftUI
 
 struct BackgroundView: View {
     @EnvironmentObject var model: ForecastViewModel
-    let forecastTodayForSelectedCity: ForecastTodayModel
+    let forecastTodayModel: ForecastTodayModel
     
     var body: some View {
-        if model.isDay(forecastTodayForSelectedCity),
-           let id = forecastTodayForSelectedCity.weather.first?.id {
+        if model.isDay(forecastTodayModel),
+           let id = forecastTodayModel.weather.first?.id {
                 switch id {
                 case 800:
                     Image("day_clearsky")
@@ -32,7 +32,7 @@ struct BackgroundView: View {
                 }
         }
             else {
-                if let id = forecastTodayForSelectedCity.weather.first?.id {
+                if let id = forecastTodayModel.weather.first?.id {
                     switch id {
                     case 800:
                         Image("night_clearsky")
