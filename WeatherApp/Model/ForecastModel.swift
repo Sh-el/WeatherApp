@@ -3,7 +3,7 @@ import Combine
 
 struct ForecastModel {
     struct Forecast: Equatable {
-        static func == (lhs: ForecastModel.Forecast, rhs: ForecastModel.Forecast) -> Bool {
+        static func ==(lhs: ForecastModel.Forecast, rhs: ForecastModel.Forecast) -> Bool {
             return lhs.id == rhs.id
         }
         

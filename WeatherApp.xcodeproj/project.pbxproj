@@ -25,6 +25,7 @@
 		DF3371B628A184AE00585676 /* CloudinessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3371B528A184AE00585676 /* CloudinessView.swift */; };
 		DF3371BC28A2C9AB00585676 /* AirPollutionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3371BB28A2C9AB00585676 /* AirPollutionModel.swift */; };
 		DF3371BF28A2CC0F00585676 /* BorderViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3371BE28A2CC0F00585676 /* BorderViewModifier.swift */; };
+		DF3683E42946666C00D43555 /* APIProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3683E32946666C00D43555 /* APIProtocol.swift */; };
 		DF87100F28F6B32400AC5080 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF87100E28F6B32400AC5080 /* MapView.swift */; };
 		DF93459F28AD1BED00FC1A8D /* ButtonRemoveCity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF93459E28AD1BED00FC1A8D /* ButtonRemoveCity.swift */; };
 		DF9345A128AE16EF00FC1A8D /* ButtonAddCity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9345A028AE16EF00FC1A8D /* ButtonAddCity.swift */; };
@@ -80,6 +81,7 @@
 		DF3371B528A184AE00585676 /* CloudinessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudinessView.swift; sourceTree = "<group>"; };
 		DF3371BB28A2C9AB00585676 /* AirPollutionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirPollutionModel.swift; sourceTree = "<group>"; };
 		DF3371BE28A2CC0F00585676 /* BorderViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderViewModifier.swift; sourceTree = "<group>"; };
+		DF3683E32946666C00D43555 /* APIProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIProtocol.swift; sourceTree = "<group>"; };
 		DF87100E28F6B32400AC5080 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		DF93459E28AD1BED00FC1A8D /* ButtonRemoveCity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonRemoveCity.swift; sourceTree = "<group>"; };
 		DF9345A028AE16EF00FC1A8D /* ButtonAddCity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonAddCity.swift; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 			children = (
 				DFB91FD128CC56940081DD56 /* ForecastViewModel.swift */,
 				DFC7F24F28D10AEB00CE0032 /* GeocodingViewModel.swift */,
+				DF3683E32946666C00D43555 /* APIProtocol.swift */,
 				DF32AEF828B21502006AD468 /* LocationManager.swift */,
 			);
 			path = ViewModel;
@@ -421,6 +424,7 @@
 				2482B21E2875A3AA009A0178 /* ForecastForFiveDaysThreeHoursModel.swift in Sources */,
 				240D66DD287AED5F00B244A4 /* GeocodingModel.swift in Sources */,
 				DFB91FE628CF123B0081DD56 /* ErrorView.swift in Sources */,
+				DF3683E42946666C00D43555 /* APIProtocol.swift in Sources */,
 				DF93459F28AD1BED00FC1A8D /* ButtonRemoveCity.swift in Sources */,
 				DFB47A3F28BA0D19002B440E /* IconsModifier.swift in Sources */,
 				DFB91FEA28CF29F20081DD56 /* LocationAccessAllowed.swift in Sources */,

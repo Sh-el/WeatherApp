@@ -10,6 +10,8 @@ struct ErrorView: View {
             InvalidRequest(color: color)
         case API.RequestError.decodingError:
             DecodingError()
+        case API.RequestError.addressUnreachable:
+            Text("addressUnreachable")
         default:
             ErrorOther(color: color)
         }

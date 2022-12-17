@@ -21,7 +21,7 @@ struct MainView: View {
 extension View {
     @ViewBuilder
     func FetchResult<T>(_ result: Result<T, Error>?,
-                        @ViewBuilder completion:  (T) -> some View,
+                        @ViewBuilder completion: (T) -> some View,
                         @ViewBuilder failure: (Error) -> some View,
                         @ViewBuilder none: () -> some View) -> some View {
         switch result {

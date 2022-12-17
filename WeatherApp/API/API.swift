@@ -9,6 +9,7 @@ struct API {
         case unknownError
         case timeOut
         case noError
+        case loadDataError
     }
   
     static func fetch(url: String) -> AnyPublisher<URL, Error> {
@@ -51,6 +52,23 @@ struct API {
             }
         return dataTaskPublisher
             .map{$0}
+            .eraseToAnyPublisher()
+    }
+    
+    static func load<T: Decodable>(url: String) -> AnyPublisher<T, Error> {
+        Just(url)
+            .tryMap{value in
+                do {
+                    if let url = FileManager.documentURL?.appendingPathComponent(value) {
+                        return try Data(contentsOf: url)
+                    } else {
+                        throw RequestError.addressUnreachable
+                    }
+                } catch {
+                    throw RequestError.loadDataError
+                }
+            }
+            .flatMap(API.decode)
             .eraseToAnyPublisher()
     }
 }
