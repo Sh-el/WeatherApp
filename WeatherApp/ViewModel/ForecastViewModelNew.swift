@@ -1,24 +1,19 @@
 import Foundation
 import Combine
 
-final class ForecastViewModel: ObservableObject {
+final class ForecastViewModelNew: ObservableObject {
+    //Output
     @MainActor @Published var forecastForCities: Result<Array<ForecastModel.Forecast>, Error>?
     @MainActor @Published var forecastForNewCity: Result<ForecastModel.Forecast, Error>?
     
+    private let apiNew: APIProtocol
+    
     private var subscriptions = Set<AnyCancellable>()
     
-    //    func weatherForecast1(_ coordForCities: @autoclosure () -> [ForecastTodayModel.CityCoord]?) {
-    //        coordForCities()
-    //            .publisher
-    //            .flatMap(ForecastModel.fetchWeatherForecasts)
-    //            .asResult()
-    //            .receive(on: DispatchQueue.main)
-    //            .assign(to: &$forecastForCities)
-    //    }
     
-    func weatherForecast2() {
-        API.load(url: "CitiesCoord1")
-            .replaceError(with: []) //bad 
+    func weatherForecast() {
+        apiNew.load(url: "CitiesCoord1")
+        
             .flatMap(ForecastModel.fetchWeatherForecasts)
             .asResult()
             .receive(on: DispatchQueue.main)
@@ -84,6 +79,8 @@ final class ForecastViewModel: ObservableObject {
             .map{$0.forecastToday.coord}
             .collect()
             .sink(receiveValue: {[weak self] citiesCoord in
+                
+                
                 self?.save(citiesCoord)})
             .store(in: &subscriptions)
     }
@@ -132,83 +129,16 @@ final class ForecastViewModel: ObservableObject {
         }
     }
     
-    init() {
-        //   weatherForecast1(loadCitiesCoord1())
-        weatherForecast2()
-    }
-}
-
-extension Publisher {
-    func asResult() -> AnyPublisher<Result<Output, Failure>?, Never> {
-        self
-            .map(Result.success)
-            .catch{error in
-                Just(.failure(error))
-            }
-            .eraseToAnyPublisher()
+    init(apiNew: APIProtocol) {
+        self.apiNew = apiNew
+        weatherForecast()
     }
 }
 
 
-extension Publisher {
-    func extractResult<Success, Failure>() -> AnyPublisher<Success, any Error> where Output == Result<Success, Failure>, Failure : Error {
-        return tryMap { result -> Success in
-            switch result {
-            case let .success(value):
-                return value
-            case let .failure(error):
-                throw error
-            }
-        }
-        .eraseToAnyPublisher()
-    }
-}
 
 
-extension Int {
-    func getDateStringFromUTC() -> String {
-        let date = Date(timeIntervalSince1970: TimeInterval(self))
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "EE"
-        dateFormatter.locale = Locale(identifier: "us_US")
-        return dateFormatter.string(from: date)
-    }
-}
 
-extension Int {
-    func getTimeStringFromUTC() -> String {
-        let date = Date(timeIntervalSince1970: TimeInterval(self))
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "HH:mm"
-        dateFormatter.locale = Locale(identifier: "us_US")
-        return dateFormatter.string(from: date)
-    }
-}
-
-extension Int {
-    func getTimeIntFromUTC() -> Int {
-        let date = Date(timeIntervalSince1970: TimeInterval(self))
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "HH"
-        dateFormatter.locale = Locale(identifier: "ru_US")
-        return Int(dateFormatter.string(from: date)) ?? 0
-    }
-}
-
-extension FileManager {
-    static var documentURL: URL? {
-        return Self.default.urls(
-            for: .documentDirectory,
-            in: .userDomainMask).first
-    }
-}
-
-extension Date {
-    static var midnight: Date {Calendar.current.startOfDay(for: Date())}
-    var dayAfterMidnight: Date {
-        Calendar.current.date(byAdding: .day, value: 1, to: Date.midnight)!
-    }
-}
 
 
 

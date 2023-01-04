@@ -33,6 +33,4 @@ extension View {
             none()
         }
     }
-    
-    
 }

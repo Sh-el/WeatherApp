@@ -13,6 +13,7 @@ struct ForecastModel {
         let forecastForFiveDays: ForecastForFiveDaysModel
         let airPollutionModel: AirPollutionModel
     }
+    
 }
 
 extension ForecastModel {
@@ -82,6 +83,8 @@ extension ForecastModel {
             .tryMap{$0}
             .eraseToAnyPublisher()
     }
+    
+    
 }
 
 extension ForecastModel {

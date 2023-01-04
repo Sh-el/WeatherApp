@@ -58,6 +58,8 @@
 		DFC7F25428D1EB0B00CE0032 /* AddCityListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC7F25328D1EB0B00CE0032 /* AddCityListView.swift */; };
 		DFC7F25628D223B800CE0032 /* DecodingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC7F25528D223B800CE0032 /* DecodingError.swift */; };
 		DFC846E028F899F400F8BCC1 /* ShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC846DF28F899F400F8BCC1 /* ShareView.swift */; };
+		DFC877CB294F37E000DD9339 /* APINew.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC877CA294F37E000DD9339 /* APINew.swift */; };
+		DFC877CD294F38C900DD9339 /* ForecastViewModelNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC877CC294F38C900DD9339 /* ForecastViewModelNew.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -114,6 +116,8 @@
 		DFC7F25328D1EB0B00CE0032 /* AddCityListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCityListView.swift; sourceTree = "<group>"; };
 		DFC7F25528D223B800CE0032 /* DecodingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodingError.swift; sourceTree = "<group>"; };
 		DFC846DF28F899F400F8BCC1 /* ShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareView.swift; sourceTree = "<group>"; };
+		DFC877CA294F37E000DD9339 /* APINew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APINew.swift; sourceTree = "<group>"; };
+		DFC877CC294F38C900DD9339 /* ForecastViewModelNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastViewModelNew.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				DFB91FD128CC56940081DD56 /* ForecastViewModel.swift */,
+				DFC877CC294F38C900DD9339 /* ForecastViewModelNew.swift */,
 				DFC7F24F28D10AEB00CE0032 /* GeocodingViewModel.swift */,
 				DF3683E32946666C00D43555 /* APIProtocol.swift */,
 				DF32AEF828B21502006AD468 /* LocationManager.swift */,
@@ -308,6 +313,7 @@
 			isa = PBXGroup;
 			children = (
 				DFB47A5128BFB1B7002B440E /* API.swift */,
+				DFC877CA294F37E000DD9339 /* APINew.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -440,6 +446,7 @@
 				DF948A7D28C9CDC300FD6E9B /* LocationAccessDenied.swift in Sources */,
 				24FE69592879D78B00E8AEEA /* ForecastTodayView.swift in Sources */,
 				DF9345A128AE16EF00FC1A8D /* ButtonAddCity.swift in Sources */,
+				DFC877CD294F38C900DD9339 /* ForecastViewModelNew.swift in Sources */,
 				DFB47A4128BA0E0B002B440E /* AddCityIfCitiesIsEmptyButtonModifier.swift in Sources */,
 				DFC846E028F899F400F8BCC1 /* ShareView.swift in Sources */,
 				DF3371BC28A2C9AB00585676 /* AirPollutionModel.swift in Sources */,
@@ -457,6 +464,7 @@
 				DFA339DB28AAB3580040EB9A /* ForecastModel.swift in Sources */,
 				2482B218287582B6009A0178 /* Constants.swift in Sources */,
 				DFC7F25028D10AEB00CE0032 /* GeocodingViewModel.swift in Sources */,
+				DFC877CB294F37E000DD9339 /* APINew.swift in Sources */,
 				DF87100F28F6B32400AC5080 /* MapView.swift in Sources */,
 				DFB47A5228BFB1B7002B440E /* API.swift in Sources */,
 				DFC7F24E28D1073300CE0032 /* RemoveCitiesView.swift in Sources */,
@@ -606,7 +614,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -641,7 +649,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

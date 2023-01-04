@@ -1,7 +1,7 @@
 import Foundation
 import Combine
 
-final class GeocodingViewModel: ObservableObject, APIProtocol {
+final class GeocodingViewModel: ObservableObject {
     typealias GeocodingAndError = Result<[GeocodingModel.Geocoding], Error>
     
     @Published var newCity = "" //input
